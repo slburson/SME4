@@ -1,0 +1,97 @@
+;; -*- mode: lisp -*-
+
+;;;; cyclepad dgroup dump -- 2/7/94, 13:2:19
+;;; problem to be solved, with goal to find nu_thermal(cycle) = 58.58476%.
+
+(in-package :common-lisp-user)
+(sme::defdescription gas-turbine-cycle-problem
+;; parts list
+ (thermodynamic-cycle cycle)
+ (turbine turbine2 t2-in cool2-in)
+ (compressor compressor2 comp2-in h2-in)
+ (heater heater2 h2-in t2-in)
+ (cooler cooler2 cool2-in comp2-in)
+;; stuffs list
+ (thermodynamic-stuff t2-in)
+ (thermodynamic-stuff h2-in)
+ (thermodynamic-stuff comp2-in)
+ (thermodynamic-stuff cool2-in)
+;; physical processes
+ (heat-flow (heat-source heater2) (heat-source heater2) h2-in t2-in)
+ (heat-flow cool2-in comp2-in (heat-source cooler2) (heat-source cooler2))
+ (fluid-flow comp2-in h2-in)
+ (fluid-flow h2-in t2-in)
+ (fluid-flow t2-in cool2-in)
+ (fluid-flow cool2-in comp2-in)
+ (compression comp2-in h2-in compressor2)
+ (expansion t2-in cool2-in turbine2)
+;; modeling assumptions.
+ (heat-engine cycle)
+ (adiabatic turbine2)
+ (isentropic turbine2)
+ (isentropic compressor2)
+ (adiabatic compressor2)
+ (not (isothermal compressor2))
+ (not (polytropic compressor2))
+ (not (non-polytropic compressor2))
+ (isobaric heater2)
+ (isobaric cooler2)
+ ;; substance and phase information
+ (substance-of t2-in helium)
+ (gas t2-in)
+ (substance-of h2-in helium)
+ (gas h2-in)
+ (substance-of comp2-in helium)
+ (gas comp2-in)
+ (substance-of cool2-in helium)
+ (gas cool2-in)
+;; numerical values
+(given (nvalue (t t2-in) 773.15))
+(given (nvalue (mass-flow comp2-in) 1.0))
+(given (nvalue (t comp2-in) 303.15))
+(given (nvalue (p comp2-in) 100000.0))
+(given (nvalue (pr turbine2) 9.0))
+;; rationale for equations
+(implies (heat-engine cycle)
+         (equation (= (nu-thermal cycle)
+                      (/ (net-work cycle)
+                         (q-in cycle)))))
+(implies (heat-engine cycle)
+         (equation
+           (= (work-ratio cycle)
+              (/ (net-work cycle)
+                 (work-out cycle)))))
+(implies
+  (and (members (work-flows-in cycle)
+                (the-set (shaft-work compressor2)))
+       (thermodynamic-cycle cycle))
+  (equation (= (work-in cycle)
+               (+ (shaft-work compressor2)))))
+(implies
+  (and (members (work-flows-out cycle)
+                (the-set (shaft-work turbine2)))
+       (thermodynamic-cycle cycle))
+  (equation (= (work-out cycle)
+               (+ (shaft-work turbine2)))))
+(implies
+  (and (members (heat-flows-in cycle)
+                (the-set (q heater2)))
+       (thermodynamic-cycle cycle))
+  (equation (= (q-in cycle)
+               (+ (q heater2)))))
+(implies
+  (and (members (heat-flows-out cycle)
+                (the-set (q cooler2)))
+       (thermodynamic-cycle cycle))
+  (equation (= (q-out cycle)
+               (+ (q cooler2)))))
+(implies (thermodynamic-cycle cycle)
+         (equation (= (net-work cycle)
+                      (+ (work-in cycle)
+                         (work-out cycle)))))
+(implies (thermodynamic-cycle cycle)
+         (equation (= (net-q cycle)
+                      (+ (q-in cycle)
+                         (q-out cycle)))))
+ (goal-parameter (nu-thermal cycle))
+ )

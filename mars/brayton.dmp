@@ -1,0 +1,935 @@
+
+"c:\\qrg\\mars\\v1\\brayton.dmp"
+> 
+(ATEST4 :SERIOUS)
+Skimming the example..
+ 1 interpretations of the example:
+;; Mapping 139: Score 15.3250
+
+(HEAT-FLOW (HEAT-SOURCE heater1) (HEAT-SOURCE heater1) h-in t-in)   || (HEAT-FLOW (HEAT-SOURCE heater2) (HEAT-SOURCE heater2) h2-in t2-in)
+(HEAT-FLOW cool-in comp-in (HEAT-SOURCE cooler1) (HEAT-SOURCE cooler1))   || (HEAT-FLOW cool2-in comp2-in (HEAT-SOURCE cooler2) (HEAT-SOURCE cooler2))
+(THERMODYNAMIC-CYCLE cycle)              || (THERMODYNAMIC-CYCLE cycle)
+(HEAT-ENGINE cycle)                      || (HEAT-ENGINE cycle)
+(NU-THERMAL cycle)                       || (NU-THERMAL cycle)
+(ADIABATIC turbine1)                     || (ADIABATIC turbine2)
+(ISENTROPIC turbine1)                    || (ISENTROPIC turbine2)
+(ISOTHERMAL compressor1)                 || (ISOTHERMAL compressor2)
+(POLYTROPIC compressor1)                 || (POLYTROPIC compressor2)
+(NON-POLYTROPIC compressor1)             || (NON-POLYTROPIC compressor2)
+(SHAFT-WORK turbine1)                    || (SHAFT-WORK turbine2)
+(ISENTROPIC compressor1)                 || (ISENTROPIC compressor2)
+(ADIABATIC compressor1)                  || (ADIABATIC compressor2)
+(SHAFT-WORK compressor1)                 || (SHAFT-WORK compressor2)
+(P comp-in)                              || (P comp2-in)
+(ISOBARIC heater1)                       || (ISOBARIC heater2)
+(ISOBARIC cooler1)                       || (ISOBARIC cooler2)
+(THERMODYNAMIC-STUFF t-in)               || (THERMODYNAMIC-STUFF t2-in)
+(THERMODYNAMIC-STUFF h-in)               || (THERMODYNAMIC-STUFF h2-in)
+(THERMODYNAMIC-STUFF cool-in)            || (THERMODYNAMIC-STUFF cool2-in)
+(GAS t-in)                               || (GAS t2-in)
+(GAS h-in)                               || (GAS h2-in)
+(GAS cool-in)                            || (GAS cool2-in)
+(THERMODYNAMIC-STUFF comp-in)            || (THERMODYNAMIC-STUFF comp2-in)
+(GAS comp-in)                            || (GAS comp2-in)
+(TURBINE turbine1 t-in cool-in)          || (TURBINE turbine2 t2-in cool2-in)
+(EXPANSION t-in cool-in turbine1)        || (EXPANSION t2-in cool2-in turbine2)
+(COMPRESSOR compressor1 comp-in h-in)    || (COMPRESSOR compressor2 comp2-in h2-in)
+(COMPRESSION comp-in h-in compressor1)   || (COMPRESSION comp2-in h2-in compressor2)
+(FLUID-FLOW h-in t-in)                   || (FLUID-FLOW h2-in t2-in)
+(FLUID-FLOW t-in cool-in)                || (FLUID-FLOW t2-in cool2-in)
+(HEATER heater1 h-in t-in)               || (HEATER heater2 h2-in t2-in)
+(FLUID-FLOW comp-in h-in)                || (FLUID-FLOW comp2-in h2-in)
+(FLUID-FLOW cool-in comp-in)             || (FLUID-FLOW cool2-in comp2-in)
+(COOLER cooler1 cool-in comp-in)         || (COOLER cooler2 cool2-in comp2-in)
+(SUBSTANCE-OF t-in air)                  || (SUBSTANCE-OF t2-in helium)
+(SUBSTANCE-OF h-in air)                  || (SUBSTANCE-OF h2-in helium)
+(SUBSTANCE-OF cool-in air)               || (SUBSTANCE-OF cool2-in helium)
+(SUBSTANCE-OF comp-in air)               || (SUBSTANCE-OF comp2-in helium)
+(HEAT-SOURCE heater1)                    || (HEAT-SOURCE heater2)
+(HEAT-SOURCE cooler1)                    || (HEAT-SOURCE cooler2)
+thermodynamic-cycle                      || thermodynamic-cycle
+heat-engine                              || heat-engine
+nu-thermal                               || nu-thermal
+cycle                                    || cycle
+isothermal                               || isothermal
+polytropic                               || polytropic
+non-polytropic                           || non-polytropic
+isentropic                               || isentropic
+adiabatic                                || adiabatic
+shaft-work                               || shaft-work
+p                                        || p
+isobaric                                 || isobaric
+thermodynamic-stuff                      || thermodynamic-stuff
+gas                                      || gas
+turbine                                  || turbine
+expansion                                || expansion
+turbine1                                 || turbine2
+compressor                               || compressor
+compression                              || compression
+compressor1                              || compressor2
+heater                                   || heater
+fluid-flow                               || fluid-flow
+cooler                                   || cooler
+air                                      || helium
+substance-of                             || substance-of
+heater1                                  || heater2
+h-in                                     || h2-in
+t-in                                     || t2-in
+cool-in                                  || cool2-in
+comp-in                                  || comp2-in
+cooler1                                  || cooler2
+heat-flow                                || heat-flow
+heat-source                              || heat-source
+
+Inferences:
+
+Starting in..
+===== 1 =============
+  Looking for (NU-THERMAL CYCLE)..
+===== 2 =============
+ Found 1 equations for (NU-THERMAL CYCLE).
+  1. (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))
+===== 3 =============
+   Seeing if example can help with (NU-THERMAL CYCLE)..
+    <Mapping 139> might help, CYCLE <-> CYCLE
+  From example: (IMPLIES (HEAT-ENGINE CYCLE) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))))
+  From example: (DERIVED-BY (NVALUE (NU-THERMAL CYCLE) 0.466223704814102) (AND (NVALUE (NET-WORK CYCLE) 204887.567574197) (NVALUE (Q-IN CYCLE) 439461.92666435) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE))))))
+  Extending interpretations..
+    1 interps relevant for (NU-THERMAL CYCLE).
+===== 4 =============
+   For (NU-THERMAL CYCLE), maybe (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))..
+===== 5 =============
+  Looking for (Q-IN CYCLE)..
+===== 6 =============
+ Found 3 equations for (Q-IN CYCLE).
+  1. (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))
+  2. (= (NET-Q CYCLE) (+ (Q-IN CYCLE) (Q-OUT CYCLE)))
+  3. (= (Q-IN CYCLE) (+ (Q HEATER2)))
+===== 7 =============
+   Seeing if example can help with (Q-IN CYCLE)..
+    <Mapping 218> might help, CYCLE <-> CYCLE
+  From example: (IMPLIES (AND (MEMBERS (HEAT-FLOWS-IN CYCLE) (THE-SET (Q HEATER1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1)))))
+  From example: (DERIVED-BY (NVALUE (Q-IN CYCLE) 439461.92666435) (AND (NVALUE (Q HEATER1) 439461.92666435) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1))))))
+     [Already read (DERIVED-BY (NVALUE (NU-THERMAL CYCLE) 0.466223704814102) (AND (NVALUE (NET-WORK CYCLE) 204887.567574197) (NVALUE (Q-IN CYCLE) 439461.92666435) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))))).]
+     [Already read (IMPLIES (HEAT-ENGINE CYCLE) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE))))).]
+  Extending interpretations..
+    1 interps relevant for (Q-IN CYCLE).
+===== 8 =============
+   For (Q-IN CYCLE), maybe (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))..
+   For (Q-IN CYCLE), maybe (= (Q-IN CYCLE) (+ (Q HEATER2)))..
+===== 9 =============
+  Looking for (Q HEATER2)..
+===== 10 =============
+ Found 1 equations for (Q HEATER2).
+  1. (= (Q-IN CYCLE) (+ (Q HEATER2)))
+===== 11 =============
+   Seeing if example can help with (Q HEATER2)..
+    <Mapping 232> might help, HEATER2 <-> HEATER1
+     [Already read (IMPLIES (AND (MEMBERS (HEAT-FLOWS-IN CYCLE) (THE-SET (Q HEATER1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1))))).]
+     [Already read (DERIVED-BY (NVALUE (Q-IN CYCLE) 439461.92666435) (AND (NVALUE (Q HEATER1) 439461.92666435) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1)))))).]
+  From example: (DERIVED-BY (NVALUE (Q HEATER1) 439461.92666435) (AND (NVALUE (MASS-FLOW HEATER1) 1.0) (NVALUE (SPEC-Q HEATER1) 439461.92666435) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1))))))
+  From example: (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1)))))
+  Extending interpretations..
+    1 interps relevant for (Q HEATER2).
+===== 12 =============
+   For (Q HEATER2), maybe (= (Q-IN CYCLE) (+ (Q HEATER2)))..
+   For (Q HEATER2), maybe (= (SPEC-Q HEATER2) (/ (Q HEATER2) (MASS-FLOW HEATER2)))..
+===== 13 =============
+  Looking for (MASS-FLOW HEATER2)..
+===== 14 =============
+===== 15 =============
+   Seeing if example can help with (MASS-FLOW HEATER2)..
+    <Mapping 232> might help, HEATER2 <-> HEATER1
+     [Already read (DERIVED-BY (NVALUE (Q HEATER1) 439461.92666435) (AND (NVALUE (MASS-FLOW HEATER1) 1.0) (NVALUE (SPEC-Q HEATER1) 439461.92666435) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1)))))).]
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1))))).]
+  From example: (DERIVED-BY (NVALUE (MASS-FLOW HEATER1) 1.0) (AND (NVALUE (MASS-FLOW H-IN) 1.0) (EQUATION (= (MASS-FLOW H-IN) (MASS-FLOW HEATER1)))))
+  Extending interpretations..
+    1 interps relevant for (MASS-FLOW HEATER2).
+===== 16 =============
+   For (MASS-FLOW HEATER2), maybe (= (SPEC-Q HEATER2) (/ (Q HEATER2) (MASS-FLOW HEATER2)))..
+   For (MASS-FLOW HEATER2), maybe (= (MASS-FLOW H2-IN) (MASS-FLOW HEATER2))..
+===== 17 =============
+  Looking for (MASS-FLOW H2-IN)..
+===== 18 =============
+===== 19 =============
+   Seeing if example can help with (MASS-FLOW H2-IN)..
+    <Mapping 269> might help, H2-IN <-> H-IN
+     [Already read (DERIVED-BY (NVALUE (MASS-FLOW HEATER1) 1.0) (AND (NVALUE (MASS-FLOW H-IN) 1.0) (EQUATION (= (MASS-FLOW H-IN) (MASS-FLOW HEATER1))))).]
+  From example: (DERIVED-BY (NVALUE (MASS-FLOW H-IN) 1.0) (AND (NVALUE (MASS-FLOW T-IN) 1.0) (EQUATION (= (MASS-FLOW H-IN) (MASS-FLOW T-IN)))))
+  Extending interpretations..
+    1 interps relevant for (MASS-FLOW H2-IN).
+===== 20 =============
+   For (MASS-FLOW H2-IN), maybe (= (MASS-FLOW H2-IN) (MASS-FLOW HEATER2))..
+   For (MASS-FLOW H2-IN), maybe (= (MASS-FLOW H2-IN) (MASS-FLOW T2-IN))..
+===== 21 =============
+  Looking for (MASS-FLOW T2-IN)..
+===== 22 =============
+===== 23 =============
+   Seeing if example can help with (MASS-FLOW T2-IN)..
+    <Mapping 282> might help, T2-IN <-> T-IN
+     [Already read (DERIVED-BY (NVALUE (MASS-FLOW H-IN) 1.0) (AND (NVALUE (MASS-FLOW T-IN) 1.0) (EQUATION (= (MASS-FLOW H-IN) (MASS-FLOW T-IN))))).]
+  From example: (DERIVED-BY (NVALUE (MASS-FLOW T-IN) 1.0) (AND (NVALUE (MASS-FLOW TURBINE1) 1.0) (EQUATION (= (MASS-FLOW T-IN) (MASS-FLOW TURBINE1)))))
+  From example: (DERIVED-BY (NVALUE (MASS-FLOW COOL-IN) 1.0) (AND (NVALUE (MASS-FLOW T-IN) 1.0) (EQUATION (= (MASS-FLOW T-IN) (MASS-FLOW COOL-IN)))))
+  Extending interpretations..
+    1 interps relevant for (MASS-FLOW T2-IN).
+===== 24 =============
+   For (MASS-FLOW T2-IN), maybe (= (MASS-FLOW H2-IN) (MASS-FLOW T2-IN))..
+   For (MASS-FLOW T2-IN), maybe (= (MASS-FLOW T2-IN) (MASS-FLOW TURBINE2))..
+   For (MASS-FLOW T2-IN), maybe (= (MASS-FLOW T2-IN) (MASS-FLOW COOL2-IN))..
+===== 25 =============
+  Looking for (MASS-FLOW TURBINE2)..
+===== 26 =============
+===== 27 =============
+   Seeing if example can help with (MASS-FLOW TURBINE2)..
+    <Mapping 311> might help, TURBINE2 <-> TURBINE1
+     [Already read (DERIVED-BY (NVALUE (MASS-FLOW T-IN) 1.0) (AND (NVALUE (MASS-FLOW TURBINE1) 1.0) (EQUATION (= (MASS-FLOW T-IN) (MASS-FLOW TURBINE1))))).]
+  From example: (DERIVED-BY (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (AND (NVALUE (MASS-FLOW TURBINE1) 1.0) (NVALUE (SPEC-SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (SPEC-SHAFT-WORK TURBINE1) (/ (SHAFT-WORK TURBINE1) (MASS-FLOW TURBINE1))))))
+  From example: (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (SPEC-SHAFT-WORK TURBINE1) (/ (SHAFT-WORK TURBINE1) (MASS-FLOW TURBINE1)))))
+  From example: (GIVEN (NVALUE (MASS-FLOW TURBINE1) 1.0))
+  Extending interpretations..
+    1 interps relevant for (MASS-FLOW TURBINE2).
+===== 28 =============
+   For (MASS-FLOW TURBINE2), maybe (= (SPEC-SHAFT-WORK TURBINE2) (/ (SHAFT-WORK TURBINE2) (MASS-FLOW TURBINE2)))..
+   For (MASS-FLOW TURBINE2), maybe (= (MASS-FLOW T2-IN) (MASS-FLOW TURBINE2))..
+===== 29 =============
+  Looking for (SHAFT-WORK TURBINE2)..
+===== 30 =============
+ Found 1 equations for (SHAFT-WORK TURBINE2).
+  1. (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))
+===== 31 =============
+   Seeing if example can help with (SHAFT-WORK TURBINE2)..
+    <Mapping 352> might help, TURBINE2 <-> TURBINE1
+  From example: (IMPLIES (AND (MEMBERS (WORK-FLOWS-OUT CYCLE) (THE-SET (SHAFT-WORK TURBINE1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1)))))
+  From example: (DERIVED-BY (NVALUE (WORK-OUT CYCLE) 467815.29608226) (AND (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1))))))
+     [Already read (DERIVED-BY (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (AND (NVALUE (MASS-FLOW TURBINE1) 1.0) (NVALUE (SPEC-SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (SPEC-SHAFT-WORK TURBINE1) (/ (SHAFT-WORK TURBINE1) (MASS-FLOW TURBINE1)))))).]
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (SPEC-SHAFT-WORK TURBINE1) (/ (SHAFT-WORK TURBINE1) (MASS-FLOW TURBINE1))))).]
+  Extending interpretations..
+    1 interps relevant for (SHAFT-WORK TURBINE2).
+===== 32 =============
+   For (SHAFT-WORK TURBINE2), maybe (= (SPEC-SHAFT-WORK TURBINE2) (/ (SHAFT-WORK TURBINE2) (MASS-FLOW TURBINE2)))..
+   For (SHAFT-WORK TURBINE2), maybe (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))..
+===== 33 =============
+  Looking for (WORK-OUT CYCLE)..
+===== 34 =============
+ Found 3 equations for (WORK-OUT CYCLE).
+  1. (= (WORK-RATIO CYCLE) (/ (NET-WORK CYCLE) (WORK-OUT CYCLE)))
+  2. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  3. (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))
+===== 35 =============
+   Seeing if example can help with (WORK-OUT CYCLE)..
+    <Mapping 380> might help, CYCLE <-> CYCLE
+  From example: (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))))
+  From example: (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-OUT CYCLE) (THE-SET (SHAFT-WORK TURBINE1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-OUT CYCLE) 467815.29608226) (AND (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1)))))).]
+  Extending interpretations..
+    1 interps relevant for (WORK-OUT CYCLE).
+===== 36 =============
+   For (WORK-OUT CYCLE), maybe (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))..
+   For (WORK-OUT CYCLE), maybe (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))..
+===== 37 =============
+  Looking for (WORK-IN CYCLE)..
+===== 38 =============
+ Found 2 equations for (WORK-IN CYCLE).
+  1. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  2. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 39 =============
+   Seeing if example can help with (WORK-IN CYCLE)..
+    <Mapping 402> might help, CYCLE <-> CYCLE
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+  From example: (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))
+  From example: (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))))
+  Extending interpretations..
+    1 interps relevant for (WORK-IN CYCLE).
+===== 40 =============
+   For (WORK-IN CYCLE), maybe (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))..
+   For (WORK-IN CYCLE), maybe (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))..
+===== 41 =============
+  Looking for (SHAFT-WORK COMPRESSOR2)..
+===== 42 =============
+ Found 1 equations for (SHAFT-WORK COMPRESSOR2).
+  1. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 43 =============
+   Seeing if example can help with (SHAFT-WORK COMPRESSOR2)..
+    <Mapping 420> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))).]
+  From example: (DERIVED-BY (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1))))))
+  From example: (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1)))))
+  Extending interpretations..
+    1 interps relevant for (SHAFT-WORK COMPRESSOR2).
+===== 44 =============
+   For (SHAFT-WORK COMPRESSOR2), maybe (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))..
+   For (SHAFT-WORK COMPRESSOR2), maybe (= (SPEC-SHAFT-WORK COMPRESSOR2) (/ (SHAFT-WORK COMPRESSOR2) (MASS-FLOW COMPRESSOR2)))..
+===== 45 =============
+  Looking for (MASS-FLOW COMPRESSOR2)..
+===== 46 =============
+===== 47 =============
+   Seeing if example can help with (MASS-FLOW COMPRESSOR2)..
+    <Mapping 420> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (DERIVED-BY (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1)))))).]
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1))))).]
+  From example: (DERIVED-BY (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (AND (NVALUE (MASS-FLOW COMP-IN) 1.0) (EQUATION (= (MASS-FLOW COMP-IN) (MASS-FLOW COMPRESSOR1)))))
+  Extending interpretations..
+    1 interps relevant for (MASS-FLOW COMPRESSOR2).
+===== 48 =============
+   For (MASS-FLOW COMPRESSOR2), maybe (= (SPEC-SHAFT-WORK COMPRESSOR2) (/ (SHAFT-WORK COMPRESSOR2) (MASS-FLOW COMPRESSOR2)))..
+   For (MASS-FLOW COMPRESSOR2), maybe (= (MASS-FLOW COMP2-IN) (MASS-FLOW COMPRESSOR2))..
+===== 49 =============
+ Attempting to solve equation:
+(= 1.0 (MASS-FLOW COMPRESSOR2))
+  Found (MASS-FLOW COMPRESSOR2) = 1.0.
+===== 50 =============
+  Looking for (SPEC-SHAFT-WORK COMPRESSOR2)..
+===== 51 =============
+===== 52 =============
+   Seeing if example can help with (SPEC-SHAFT-WORK COMPRESSOR2)..
+    <Mapping 484> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1)))))).]
+  From example: (DERIVED-BY (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) -262927.728508063) (NVALUE (NU-ISENTROPIC COMPRESSOR1) 1.0) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) (SPEC-SHAFT-WORK COMPRESSOR1))))))
+  From example: (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) (SPEC-SHAFT-WORK COMPRESSOR1)))))
+  Extending interpretations..
+    1 interps relevant for (SPEC-SHAFT-WORK COMPRESSOR2).
+===== 53 =============
+   For (SPEC-SHAFT-WORK COMPRESSOR2), maybe (= (NU-ISENTROPIC COMPRESSOR2) (/ (PR COMPRESSOR2) (SPEC-SHAFT-WORK COMPRESSOR2)))..
+   For (SPEC-SHAFT-WORK COMPRESSOR2), maybe (= (SPEC-SHAFT-WORK COMPRESSOR2) (/ (SHAFT-WORK COMPRESSOR2) (MASS-FLOW COMPRESSOR2)))..
+===== 54 =============
+  Looking for (NU-ISENTROPIC COMPRESSOR2)..
+===== 55 =============
+===== 56 =============
+   Seeing if example can help with (NU-ISENTROPIC COMPRESSOR2)..
+    <Mapping 536> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) (SPEC-SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) -262927.728508063) (NVALUE (NU-ISENTROPIC COMPRESSOR1) 1.0) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) (SPEC-SHAFT-WORK COMPRESSOR1)))))).]
+  From example: (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)) (- (SPEC-H COMP-IN) (SPEC-H H-IN))))))
+  From example: (DERIVED-BY (NVALUE (NU-ISENTROPIC COMPRESSOR1) 1.0) (AND (NVALUE (SPEC-H H-IN) 563951.866439098) (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (NVALUE (SPEC-H COMP-IN) 301024.137931034) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)) (- (SPEC-H COMP-IN) (SPEC-H H-IN)))))))
+  Extending interpretations..
+    1 interps relevant for (NU-ISENTROPIC COMPRESSOR2).
+===== 57 =============
+   For (NU-ISENTROPIC COMPRESSOR2), maybe (= (NU-ISENTROPIC COMPRESSOR2) (/ (PR COMPRESSOR2) (SPEC-SHAFT-WORK COMPRESSOR2)))..
+   For (NU-ISENTROPIC COMPRESSOR2), maybe (= (NU-ISENTROPIC COMPRESSOR2) (/ (- (T COMP2-IN) (HOUT-ISENTROPIC COMPRESSOR2)) (- (T COMP2-IN) (SPEC-H H2-IN))))..
+===== 58 =============
+  Looking for (SPEC-H H2-IN)..
+===== 59 =============
+===== 60 =============
+   Seeing if example can help with (SPEC-H H2-IN)..
+    <Mapping 573> might help, H2-IN <-> H-IN
+  From example: (DERIVED-BY (NVALUE (SPEC-Q HEATER1) 439461.92666435) (AND (NVALUE (SPEC-H H-IN) 563951.866439098) (NVALUE (SPEC-H T-IN) 1003413.79310345) (EQUATION (= (SPEC-H T-IN) (+ (SPEC-H H-IN) (SPEC-Q HEATER1))))))
+  From example: (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-H T-IN) (+ (SPEC-H H-IN) (SPEC-Q HEATER1)))))
+  From example: (IMPLIES (AND (SUBSTANCE-OF H-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-H H-IN) (* (CP AIR) (T H-IN)))))
+  From example: (DERIVED-BY (NVALUE (SPEC-H H-IN) 563951.866439098) (AND (NVALUE (T H-IN) 562.033201372344) (EQUATION (= (SPEC-H H-IN) (* (CP AIR) (T H-IN)))) (NVALUE (CP AIR) 1003.41379310345)))
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)) (- (SPEC-H COMP-IN) (SPEC-H H-IN)))))).]
+     [Already read (DERIVED-BY (NVALUE (NU-ISENTROPIC COMPRESSOR1) 1.0) (AND (NVALUE (SPEC-H H-IN) 563951.866439098) (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (NVALUE (SPEC-H COMP-IN) 301024.137931034) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)) (- (SPEC-H COMP-IN) (SPEC-H H-IN))))))).]
+  Extending interpretations..
+    1 interps relevant for (SPEC-H H2-IN).
+===== 61 =============
+   For (SPEC-H H2-IN), maybe (= (NU-ISENTROPIC COMPRESSOR2) (/ (- (T COMP2-IN) (HOUT-ISENTROPIC COMPRESSOR2)) (- (T COMP2-IN) (SPEC-H H2-IN))))..
+   For (SPEC-H H2-IN), maybe (= (T T2-IN) (+ (SPEC-H H2-IN) (SPEC-Q HEATER2)))..
+   For (SPEC-H H2-IN), maybe (= (SPEC-H H2-IN) (* (CP HELIUM) (T H2-IN)))..
+===== 62 =============
+  Looking for (SPEC-Q HEATER2)..
+===== 63 =============
+===== 64 =============
+   Seeing if example can help with (SPEC-Q HEATER2)..
+    <Mapping 629> might help, HEATER2 <-> HEATER1
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1))))).]
+     [Already read (DERIVED-BY (NVALUE (Q HEATER1) 439461.92666435) (AND (NVALUE (MASS-FLOW HEATER1) 1.0) (NVALUE (SPEC-Q HEATER1) 439461.92666435) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1)))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-Q HEATER1) 439461.92666435) (AND (NVALUE (SPEC-H H-IN) 563951.866439098) (NVALUE (SPEC-H T-IN) 1003413.79310345) (EQUATION (= (SPEC-H T-IN) (+ (SPEC-H H-IN) (SPEC-Q HEATER1)))))).]
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-H T-IN) (+ (SPEC-H H-IN) (SPEC-Q HEATER1))))).]
+    No interps help with (SPEC-Q HEATER2).
+===== 65 =============
+  Looking for (T H2-IN)..
+===== 66 =============
+===== 67 =============
+   Seeing if example can help with (T H2-IN)..
+    <Mapping 629> might help, H2-IN <-> H-IN
+     [Already read (DERIVED-BY (NVALUE (SPEC-H H-IN) 563951.866439098) (AND (NVALUE (T H-IN) 562.033201372344) (EQUATION (= (SPEC-H H-IN) (* (CP AIR) (T H-IN)))) (NVALUE (CP AIR) 1003.41379310345))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF H-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-H H-IN) (* (CP AIR) (T H-IN))))).]
+  From example: (DERIVED-BY (NVALUE (T H-IN) 562.033201372344) (AND (NVALUE (P H-IN) 900000.0) (NVALUE (SPEC-S H-IN) 2422.61737635374) (EQUATION (= (SPEC-S H-IN) (- (* (CP AIR) (LOG (T H-IN))) (* (R AIR) (LOG (P H-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29)))
+  From example: (IMPLIES (AND (SUBSTANCE-OF H-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S H-IN) (- (* (CP AIR) (LOG (T H-IN))) (* (R AIR) (LOG (P H-IN)))))))
+  Extending interpretations..
+    1 interps relevant for (T H2-IN).
+===== 68 =============
+   For (T H2-IN), maybe (= (SPEC-H H2-IN) (- (* (CP HELIUM) (LOG (T H2-IN))) (* (CP HELIUM) (LOG (P H2-IN)))))..
+   For (T H2-IN), maybe (= (SPEC-H H2-IN) (* (CP HELIUM) (T H2-IN)))..
+===== 69 =============
+  Looking for (P H2-IN)..
+===== 70 =============
+===== 71 =============
+   Seeing if example can help with (P H2-IN)..
+    <Mapping 680> might help, H2-IN <-> H-IN
+  From example: (DERIVED-BY (NVALUE (P H-IN) 900000.0) (AND (NVALUE (P T-IN) 900000.0) (EQUATION (= (P H-IN) (P T-IN)))))
+     [Already read (DERIVED-BY (NVALUE (T H-IN) 562.033201372344) (AND (NVALUE (P H-IN) 900000.0) (NVALUE (SPEC-S H-IN) 2422.61737635374) (EQUATION (= (SPEC-S H-IN) (- (* (CP AIR) (LOG (T H-IN))) (* (R AIR) (LOG (P H-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF H-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S H-IN) (- (* (CP AIR) (LOG (T H-IN))) (* (R AIR) (LOG (P H-IN))))))).]
+  From example: (DERIVED-BY (NVALUE (TOUT-ISENTROPIC COMPRESSOR1) 562.033201372344) (AND (NVALUE (P H-IN) 900000.0) (NVALUE (SPEC-S COMP-IN) 2422.61737635374) (EQUATION (= (SPEC-S COMP-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC COMPRESSOR1))) (* (R AIR) (LOG (P H-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29)))
+  From example: (IMPLIES (AND (SUBSTANCE-OF COMP-IN AIR) (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COMP-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC COMPRESSOR1))) (* (R AIR) (LOG (P H-IN)))))))
+  Extending interpretations..
+    1 interps relevant for (P H2-IN).
+===== 72 =============
+   For (P H2-IN), maybe (= (SPEC-S COMP2-IN) (- (* (CP HELIUM) (LOG (TOUT-ISENTROPIC COMPRESSOR2))) (* (CP HELIUM) (LOG (P H2-IN)))))..
+   For (P H2-IN), maybe (= (SPEC-H H2-IN) (- (* (CP HELIUM) (LOG (T H2-IN))) (* (CP HELIUM) (LOG (P H2-IN)))))..
+   For (P H2-IN), maybe (= (P H2-IN) (P T2-IN))..
+===== 73 =============
+  Looking for (TOUT-ISENTROPIC COMPRESSOR2)..
+===== 74 =============
+===== 75 =============
+   Seeing if example can help with (TOUT-ISENTROPIC COMPRESSOR2)..
+    <Mapping 742> might help, COMPRESSOR2 <-> COMPRESSOR1
+  From example: (DERIVED-BY (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (AND (NVALUE (TOUT-ISENTROPIC COMPRESSOR1) 562.033201372344) (EQUATION (= (HOUT-ISENTROPIC COMPRESSOR1) (* (CP AIR) (TOUT-ISENTROPIC COMPRESSOR1)))) (NVALUE (CP AIR) 1003.41379310345)))
+  From example: (IMPLIES (AND (SUBSTANCE-OF COMP-IN AIR) (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (IDEAL-GAS AIR)) (EQUATION (= (HOUT-ISENTROPIC COMPRESSOR1) (* (CP AIR) (TOUT-ISENTROPIC COMPRESSOR1)))))
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC COMPRESSOR1) 562.033201372344) (AND (NVALUE (P H-IN) 900000.0) (NVALUE (SPEC-S COMP-IN) 2422.61737635374) (EQUATION (= (SPEC-S COMP-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC COMPRESSOR1))) (* (R AIR) (LOG (P H-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COMP-IN AIR) (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COMP-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC COMPRESSOR1))) (* (R AIR) (LOG (P H-IN))))))).]
+  Extending interpretations..
+    1 interps relevant for (TOUT-ISENTROPIC COMPRESSOR2).
+===== 76 =============
+   For (TOUT-ISENTROPIC COMPRESSOR2), maybe (= (SPEC-S COMP2-IN) (- (* (CP HELIUM) (LOG (TOUT-ISENTROPIC COMPRESSOR2))) (* (CP HELIUM) (LOG (P H2-IN)))))..
+   For (TOUT-ISENTROPIC COMPRESSOR2), maybe (= (HOUT-ISENTROPIC COMPRESSOR2) (* (CP HELIUM) (TOUT-ISENTROPIC COMPRESSOR2)))..
+===== 77 =============
+  Looking for (CP HELIUM)..found it.
+===== 78 =============
+  Looking for (HOUT-ISENTROPIC COMPRESSOR2)..
+===== 79 =============
+===== 80 =============
+   Seeing if example can help with (HOUT-ISENTROPIC COMPRESSOR2)..
+    <Mapping 805> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COMP-IN AIR) (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (IDEAL-GAS AIR)) (EQUATION (= (HOUT-ISENTROPIC COMPRESSOR1) (* (CP AIR) (TOUT-ISENTROPIC COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (AND (NVALUE (TOUT-ISENTROPIC COMPRESSOR1) 562.033201372344) (EQUATION (= (HOUT-ISENTROPIC COMPRESSOR1) (* (CP AIR) (TOUT-ISENTROPIC COMPRESSOR1)))) (NVALUE (CP AIR) 1003.41379310345))).]
+  From example: (DERIVED-BY (NVALUE (DELTA-H-ISENTROPIC COMPRESSOR1) -262927.728508063) (AND (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (NVALUE (SPEC-H COMP-IN) 301024.137931034) (EQUATION (= (DELTA-H-ISENTROPIC COMPRESSOR1) (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1))))))
+  From example: (IMPLIES (AND (SUBSTANCE-OF COMP-IN AIR) (COMPRESSOR COMPRESSOR1 COMP-IN H-IN)) (EQUATION (= (DELTA-H-ISENTROPIC COMPRESSOR1) (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)))))
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)) (- (SPEC-H COMP-IN) (SPEC-H H-IN)))))).]
+     [Already read (DERIVED-BY (NVALUE (NU-ISENTROPIC COMPRESSOR1) 1.0) (AND (NVALUE (SPEC-H H-IN) 563951.866439098) (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (NVALUE (SPEC-H COMP-IN) 301024.137931034) (EQUATION (= (NU-ISENTROPIC COMPRESSOR1) (/ (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)) (- (SPEC-H COMP-IN) (SPEC-H H-IN))))))).]
+  Extending interpretations..
+    1 interps relevant for (HOUT-ISENTROPIC COMPRESSOR2).
+===== 81 =============
+   For (HOUT-ISENTROPIC COMPRESSOR2), maybe (= (NU-ISENTROPIC COMPRESSOR2) (/ (- (T COMP2-IN) (HOUT-ISENTROPIC COMPRESSOR2)) (- (T COMP2-IN) (SPEC-H H2-IN))))..
+   For (HOUT-ISENTROPIC COMPRESSOR2), maybe (= (DELTA-H-ISENTROPIC COMPRESSOR2) (- (T COMP2-IN) (HOUT-ISENTROPIC COMPRESSOR2)))..
+   For (HOUT-ISENTROPIC COMPRESSOR2), maybe (= (HOUT-ISENTROPIC COMPRESSOR2) (* (CP HELIUM) (TOUT-ISENTROPIC COMPRESSOR2)))..
+===== 82 =============
+  Looking for (DELTA-H-ISENTROPIC COMPRESSOR2)..
+===== 83 =============
+===== 84 =============
+   Seeing if example can help with (DELTA-H-ISENTROPIC COMPRESSOR2)..
+    <Mapping 881> might help, COMPRESSOR2 <-> COMPRESSOR1
+  From example: (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) (DELTA-H-ISENTROPIC COMPRESSOR1))))
+  From example: (DERIVED-BY (NVALUE (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) -262927.728508063) (AND (NVALUE (DELTA-H-ISENTROPIC COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK-ISENTROPIC COMPRESSOR1) (DELTA-H-ISENTROPIC COMPRESSOR1)))))
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COMP-IN AIR) (COMPRESSOR COMPRESSOR1 COMP-IN H-IN)) (EQUATION (= (DELTA-H-ISENTROPIC COMPRESSOR1) (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (DELTA-H-ISENTROPIC COMPRESSOR1) -262927.728508063) (AND (NVALUE (HOUT-ISENTROPIC COMPRESSOR1) 563951.866439098) (NVALUE (SPEC-H COMP-IN) 301024.137931034) (EQUATION (= (DELTA-H-ISENTROPIC COMPRESSOR1) (- (SPEC-H COMP-IN) (HOUT-ISENTROPIC COMPRESSOR1)))))).]
+  Extending interpretations..
+    1 interps relevant for (DELTA-H-ISENTROPIC COMPRESSOR2).
+===== 85 =============
+   For (DELTA-H-ISENTROPIC COMPRESSOR2), maybe (= (DELTA-H-ISENTROPIC COMPRESSOR2) (- (T COMP2-IN) (HOUT-ISENTROPIC COMPRESSOR2)))..
+   For (DELTA-H-ISENTROPIC COMPRESSOR2), maybe (= (PR COMPRESSOR2) (DELTA-H-ISENTROPIC COMPRESSOR2))..
+===== 86 =============
+ Attempting to solve equation:
+(= 9.0 (DELTA-H-ISENTROPIC COMPRESSOR2))
+  Found (DELTA-H-ISENTROPIC COMPRESSOR2) = 9.0.
+===== 87 =============
+ Attempting to solve equation:
+(= 9.0 (- 303.15 (HOUT-ISENTROPIC COMPRESSOR2)))
+===== 88 =============
+  Looking for (P T2-IN)..
+===== 89 =============
+===== 90 =============
+   Seeing if example can help with (P T2-IN)..
+    <Mapping 924> might help, T2-IN <-> T-IN
+     [Already read (DERIVED-BY (NVALUE (P H-IN) 900000.0) (AND (NVALUE (P T-IN) 900000.0) (EQUATION (= (P H-IN) (P T-IN))))).]
+  From example: (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))))
+  From example: (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))
+  From example: (DERIVED-BY (NVALUE (SPEC-S T-IN) 3000.77873832294) (AND (NVALUE (P T-IN) 900000.0) (NVALUE (T T-IN) 1000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29)))
+  From example: (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN)))))))
+  Extending interpretations..
+    1 interps relevant for (P T2-IN).
+===== 91 =============
+   For (P T2-IN), maybe (= (SPEC-S T2-IN) (- (* (CP HELIUM) (LOG (T T2-IN))) (* (CP HELIUM) (LOG (P T2-IN)))))..
+   For (P T2-IN), maybe (= (PR TURBINE2) (/ (P T2-IN) (P COOL2-IN)))..
+   For (P T2-IN), maybe (= (P H2-IN) (P T2-IN))..
+===== 92 =============
+  Looking for (SPEC-S T2-IN)..
+===== 93 =============
+===== 94 =============
+   Seeing if example can help with (SPEC-S T2-IN)..
+    <Mapping 1042> might help, T2-IN <-> T-IN
+  From example: (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))))
+  From example: (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29)))
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-S T-IN) 3000.77873832294) (AND (NVALUE (P T-IN) 900000.0) (NVALUE (T T-IN) 1000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+  From example: (IMPLIES (AND (ISENTROPIC TURBINE1) (TURBINE TURBINE1 T-IN COOL-IN)) (EQUATION (= (SPEC-S T-IN) (SPEC-S COOL-IN))))
+  From example: (DERIVED-BY (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (EQUATION (= (SPEC-S T-IN) (SPEC-S COOL-IN)))))
+  Extending interpretations..
+    1 interps relevant for (SPEC-S T2-IN).
+===== 95 =============
+   For (SPEC-S T2-IN), maybe (= (SPEC-S T2-IN) (- (* (CP HELIUM) (LOG (T T2-IN))) (* (CP HELIUM) (LOG (P T2-IN)))))..
+   For (SPEC-S T2-IN), maybe (= (SPEC-S T2-IN) (- (* (CP HELIUM) (LOG (TOUT-ISENTROPIC TURBINE2))) (* (CP HELIUM) (LOG (P COOL2-IN)))))..
+   For (SPEC-S T2-IN), maybe (= (SPEC-S T2-IN) (SPEC-S COOL2-IN))..
+===== 96 =============
+  Looking for (P COOL2-IN)..
+===== 97 =============
+===== 98 =============
+   Seeing if example can help with (P COOL2-IN)..
+    <Mapping 1144> might help, COOL2-IN <-> COOL-IN
+     [Already read (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))).]
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))).]
+  From example: (DERIVED-BY (NVALUE (P COOL-IN) 100000.0) (AND (NVALUE (P COMP-IN) 100000.0) (EQUATION (= (P COOL-IN) (P COMP-IN)))))
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN))))))).]
+  From example: (DERIVED-BY (NVALUE (T COOL-IN) 533.776295185899) (AND (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29)))
+  From example: (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN)))))))
+  Extending interpretations..
+    1 interps relevant for (P COOL2-IN).
+===== 99 =============
+   For (P COOL2-IN), maybe (= (SPEC-S COOL2-IN) (- (* (CP HELIUM) (LOG (T COOL2-IN))) (* (CP HELIUM) (LOG (P COOL2-IN)))))..
+   For (P COOL2-IN), maybe (= (SPEC-S T2-IN) (- (* (CP HELIUM) (LOG (TOUT-ISENTROPIC TURBINE2))) (* (CP HELIUM) (LOG (P COOL2-IN)))))..
+   For (P COOL2-IN), maybe (= (PR TURBINE2) (/ (P T2-IN) (P COOL2-IN)))..
+   For (P COOL2-IN), maybe (= (P COOL2-IN) (P COMP2-IN))..
+===== 100 =============
+  Looking for (T COOL2-IN)..
+===== 101 =============
+===== 102 =============
+   Seeing if example can help with (T COOL2-IN)..
+    <Mapping 1231> might help, COOL2-IN <-> COOL-IN
+  From example: (DERIVED-BY (NVALUE (SPEC-H COOL-IN) 535598.497021188) (AND (NVALUE (T COOL-IN) 533.776295185899) (EQUATION (= (SPEC-H COOL-IN) (* (CP AIR) (T COOL-IN)))) (NVALUE (CP AIR) 1003.41379310345)))
+  From example: (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-H COOL-IN) (* (CP AIR) (T COOL-IN)))))
+     [Already read (DERIVED-BY (NVALUE (T COOL-IN) 533.776295185899) (AND (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN))))))).]
+  Extending interpretations..
+    1 interps relevant for (T COOL2-IN).
+===== 103 =============
+   For (T COOL2-IN), maybe (= (SPEC-S COOL2-IN) (- (* (CP HELIUM) (LOG (T COOL2-IN))) (* (CP HELIUM) (LOG (P COOL2-IN)))))..
+   For (T COOL2-IN), maybe (= (SPEC-H COOL2-IN) (* (CP HELIUM) (T COOL2-IN)))..
+===== 104 =============
+  Looking for (SPEC-H COOL2-IN)..
+===== 105 =============
+===== 106 =============
+   Seeing if example can help with (SPEC-H COOL2-IN)..
+    <Mapping 1313> might help, COOL2-IN <-> COOL-IN
+  From example: (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (NU-ISENTROPIC TURBINE1) (/ (- (SPEC-H T-IN) (SPEC-H COOL-IN)) (- (SPEC-H T-IN) (HOUT-ISENTROPIC TURBINE1))))))
+  From example: (DERIVED-BY (NVALUE (NU-ISENTROPIC TURBINE1) 1.0) (AND (NVALUE (SPEC-H COOL-IN) 535598.497021188) (NVALUE (HOUT-ISENTROPIC TURBINE1) 535598.497021188) (NVALUE (SPEC-H T-IN) 1003413.79310345) (EQUATION (= (NU-ISENTROPIC TURBINE1) (/ (- (SPEC-H T-IN) (SPEC-H COOL-IN)) (- (SPEC-H T-IN) (HOUT-ISENTROPIC TURBINE1)))))))
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-H COOL-IN) (* (CP AIR) (T COOL-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-H COOL-IN) 535598.497021188) (AND (NVALUE (T COOL-IN) 533.776295185899) (EQUATION (= (SPEC-H COOL-IN) (* (CP AIR) (T COOL-IN)))) (NVALUE (CP AIR) 1003.41379310345))).]
+  Extending interpretations..
+    1 interps relevant for (SPEC-H COOL2-IN).
+===== 107 =============
+   For (SPEC-H COOL2-IN), maybe (= (NU-ISENTROPIC TURBINE2) (/ (- (T T2-IN) (SPEC-H COOL2-IN)) (- (T T2-IN) (HOUT-ISENTROPIC TURBINE2))))..
+   For (SPEC-H COOL2-IN), maybe (= (SPEC-S T2-IN) (SPEC-H COOL2-IN))..
+   For (SPEC-H COOL2-IN), maybe (= (SPEC-H COOL2-IN) (- (* (CP HELIUM) (LOG (T COOL2-IN))) (* (CP HELIUM) (LOG (P COOL2-IN)))))..
+   For (SPEC-H COOL2-IN), maybe (= (SPEC-H COOL2-IN) (* (CP HELIUM) (T COOL2-IN)))..
+===== 108 =============
+  Looking for (HOUT-ISENTROPIC TURBINE2)..
+===== 109 =============
+===== 110 =============
+   Seeing if example can help with (HOUT-ISENTROPIC TURBINE2)..
+    <Mapping 1380> might help, TURBINE2 <-> TURBINE1
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (NU-ISENTROPIC TURBINE1) (/ (- (SPEC-H T-IN) (SPEC-H COOL-IN)) (- (SPEC-H T-IN) (HOUT-ISENTROPIC TURBINE1)))))).]
+     [Already read (DERIVED-BY (NVALUE (NU-ISENTROPIC TURBINE1) 1.0) (AND (NVALUE (SPEC-H COOL-IN) 535598.497021188) (NVALUE (HOUT-ISENTROPIC TURBINE1) 535598.497021188) (NVALUE (SPEC-H T-IN) 1003413.79310345) (EQUATION (= (NU-ISENTROPIC TURBINE1) (/ (- (SPEC-H T-IN) (SPEC-H COOL-IN)) (- (SPEC-H T-IN) (HOUT-ISENTROPIC TURBINE1))))))).]
+  From example: (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (HOUT-ISENTROPIC TURBINE1) (* (CP AIR) (TOUT-ISENTROPIC TURBINE1)))))
+  From example: (DERIVED-BY (NVALUE (HOUT-ISENTROPIC TURBINE1) 535598.497021188) (AND (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (EQUATION (= (HOUT-ISENTROPIC TURBINE1) (* (CP AIR) (TOUT-ISENTROPIC TURBINE1)))) (NVALUE (CP AIR) 1003.41379310345)))
+  Extending interpretations..
+    1 interps relevant for (HOUT-ISENTROPIC TURBINE2).
+===== 111 =============
+   For (HOUT-ISENTROPIC TURBINE2), maybe (= (NU-ISENTROPIC TURBINE2) (/ (- (T T2-IN) (SPEC-H COOL2-IN)) (- (T T2-IN) (HOUT-ISENTROPIC TURBINE2))))..
+   For (HOUT-ISENTROPIC TURBINE2), maybe (= (HOUT-ISENTROPIC TURBINE2) (* (CP HELIUM) (TOUT-ISENTROPIC TURBINE2)))..
+===== 112 =============
+  Looking for (TOUT-ISENTROPIC TURBINE2)..
+===== 113 =============
+===== 114 =============
+   Seeing if example can help with (TOUT-ISENTROPIC TURBINE2)..
+    <Mapping 1444> might help, TURBINE2 <-> TURBINE1
+  From example: (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (DELTA-H-ISENTROPIC TURBINE1) (* (CP AIR) (- (T T-IN) (TOUT-ISENTROPIC TURBINE1))))))
+  From example: (DERIVED-BY (NVALUE (DELTA-H-ISENTROPIC TURBINE1) 467815.29608226) (AND (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (NVALUE (T T-IN) 1000.0) (EQUATION (= (DELTA-H-ISENTROPIC TURBINE1) (* (CP AIR) (- (T T-IN) (TOUT-ISENTROPIC TURBINE1))))) (NVALUE (CP AIR) 1003.41379310345)))
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (HOUT-ISENTROPIC TURBINE1) 535598.497021188) (AND (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (EQUATION (= (HOUT-ISENTROPIC TURBINE1) (* (CP AIR) (TOUT-ISENTROPIC TURBINE1)))) (NVALUE (CP AIR) 1003.41379310345))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (HOUT-ISENTROPIC TURBINE1) (* (CP AIR) (TOUT-ISENTROPIC TURBINE1))))).]
+  Extending interpretations..
+    1 interps relevant for (TOUT-ISENTROPIC TURBINE2).
+===== 115 =============
+   For (TOUT-ISENTROPIC TURBINE2), maybe (= (SPEC-S T2-IN) (- (* (CP HELIUM) (LOG (TOUT-ISENTROPIC TURBINE2))) (* (CP HELIUM) (LOG (P COOL2-IN)))))..
+   For (TOUT-ISENTROPIC TURBINE2), maybe (= (DELTA-H-ISENTROPIC TURBINE2) (* (CP HELIUM) (- (T T2-IN) (TOUT-ISENTROPIC TURBINE2))))..
+   For (TOUT-ISENTROPIC TURBINE2), maybe (= (HOUT-ISENTROPIC TURBINE2) (* (CP HELIUM) (TOUT-ISENTROPIC TURBINE2)))..
+===== 116 =============
+  Looking for (DELTA-H-ISENTROPIC TURBINE2)..
+===== 117 =============
+===== 118 =============
+   Seeing if example can help with (DELTA-H-ISENTROPIC TURBINE2)..
+    <Mapping 1444> might help, TURBINE2 <-> TURBINE1
+  From example: (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (SPEC-SHAFT-WORK-ISENTROPIC TURBINE1) (DELTA-H-ISENTROPIC TURBINE1))))
+  From example: (DERIVED-BY (NVALUE (SPEC-SHAFT-WORK-ISENTROPIC TURBINE1) 467815.29608226) (AND (NVALUE (DELTA-H-ISENTROPIC TURBINE1) 467815.29608226) (EQUATION (= (SPEC-SHAFT-WORK-ISENTROPIC TURBINE1) (DELTA-H-ISENTROPIC TURBINE1)))))
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (DELTA-H-ISENTROPIC TURBINE1) (* (CP AIR) (- (T T-IN) (TOUT-ISENTROPIC TURBINE1)))))).]
+     [Already read (DERIVED-BY (NVALUE (DELTA-H-ISENTROPIC TURBINE1) 467815.29608226) (AND (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (NVALUE (T T-IN) 1000.0) (EQUATION (= (DELTA-H-ISENTROPIC TURBINE1) (* (CP AIR) (- (T T-IN) (TOUT-ISENTROPIC TURBINE1))))) (NVALUE (CP AIR) 1003.41379310345))).]
+  Extending interpretations..
+    1 interps relevant for (DELTA-H-ISENTROPIC TURBINE2).
+===== 119 =============
+   For (DELTA-H-ISENTROPIC TURBINE2), maybe (= (DELTA-H-ISENTROPIC TURBINE2) (* (CP HELIUM) (- (T T2-IN) (TOUT-ISENTROPIC TURBINE2))))..
+   For (DELTA-H-ISENTROPIC TURBINE2), maybe (= (PR TURBINE2) (DELTA-H-ISENTROPIC TURBINE2))..
+===== 120 =============
+  Looking for (PR TURBINE2)..
+===== 121 =============
+===== 122 =============
+   Seeing if example can help with (PR TURBINE2)..
+    <Mapping 1581> might help, TURBINE2 <-> TURBINE1
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))).]
+  From example: (GIVEN (NVALUE (PR TURBINE1) 9.0))
+  Extending interpretations..
+    1 interps relevant for (PR TURBINE2).
+===== 123 =============
+   For (PR TURBINE2), maybe (= (PR TURBINE2) (/ (P T2-IN) (P COOL2-IN)))..
+   For (PR TURBINE2), maybe (= (PR TURBINE2) (DELTA-H-ISENTROPIC TURBINE2))..
+===== 124 =============
+  Looking for (P COOL2-IN)..
+===== 125 =============
+===== 126 =============
+   Seeing if example can help with (P COOL2-IN)..
+    <Mapping 1595> might help, COOL2-IN <-> COOL-IN
+     [Already read (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))).]
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (P COOL-IN) 100000.0) (AND (NVALUE (P COMP-IN) 100000.0) (EQUATION (= (P COOL-IN) (P COMP-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (T COOL-IN) 533.776295185899) (AND (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN))))))).]
+    No interps help with (P COOL2-IN).
+===== 127 =============
+  Looking for (SPEC-S T2-IN)..
+===== 128 =============
+===== 129 =============
+   Seeing if example can help with (SPEC-S T2-IN)..
+    <Mapping 1595> might help, T2-IN <-> T-IN
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-S T-IN) 3000.77873832294) (AND (NVALUE (P T-IN) 900000.0) (NVALUE (T T-IN) 1000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (ISENTROPIC TURBINE1) (TURBINE TURBINE1 T-IN COOL-IN)) (EQUATION (= (SPEC-S T-IN) (SPEC-S COOL-IN)))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (EQUATION (= (SPEC-S T-IN) (SPEC-S COOL-IN))))).]
+    No interps help with (SPEC-S T2-IN).
+===== 130 =============
+  Looking for (P COOL2-IN)..
+===== 131 =============
+===== 132 =============
+   Seeing if example can help with (P COOL2-IN)..
+    <Mapping 1595> might help, COOL2-IN <-> COOL-IN
+     [Already read (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))).]
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (P COOL-IN) 100000.0) (AND (NVALUE (P COMP-IN) 100000.0) (EQUATION (= (P COOL-IN) (P COMP-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (T COOL-IN) 533.776295185899) (AND (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN))))))).]
+    No interps help with (P COOL2-IN).
+===== 133 =============
+  Looking for (P T2-IN)..
+===== 134 =============
+===== 135 =============
+   Seeing if example can help with (P T2-IN)..
+    <Mapping 1595> might help, T2-IN <-> T-IN
+     [Already read (DERIVED-BY (NVALUE (P H-IN) 900000.0) (AND (NVALUE (P T-IN) 900000.0) (EQUATION (= (P H-IN) (P T-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))).]
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-S T-IN) 3000.77873832294) (AND (NVALUE (P T-IN) 900000.0) (NVALUE (T T-IN) 1000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (T T-IN))) (* (R AIR) (LOG (P T-IN))))))).]
+    No interps help with (P T2-IN).
+===== 136 =============
+ Attempting to solve equation:
+(= (P COOL2-IN) 100000.0)
+  Found (P COOL2-IN) = 100000.0.
+===== 137 =============
+  Looking for (TOUT-ISENTROPIC TURBINE2)..
+===== 138 =============
+===== 139 =============
+   Seeing if example can help with (TOUT-ISENTROPIC TURBINE2)..
+    <Mapping 1595> might help, TURBINE2 <-> TURBINE1
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (DELTA-H-ISENTROPIC TURBINE1) (* (CP AIR) (- (T T-IN) (TOUT-ISENTROPIC TURBINE1)))))).]
+     [Already read (DERIVED-BY (NVALUE (DELTA-H-ISENTROPIC TURBINE1) 467815.29608226) (AND (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (NVALUE (T T-IN) 1000.0) (EQUATION (= (DELTA-H-ISENTROPIC TURBINE1) (* (CP AIR) (- (T T-IN) (TOUT-ISENTROPIC TURBINE1))))) (NVALUE (CP AIR) 1003.41379310345))).]
+     [Already read (DERIVED-BY (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF T-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S T-IN) (- (* (CP AIR) (LOG (TOUT-ISENTROPIC TURBINE1))) (* (R AIR) (LOG (P COOL-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (HOUT-ISENTROPIC TURBINE1) 535598.497021188) (AND (NVALUE (TOUT-ISENTROPIC TURBINE1) 533.776295185899) (EQUATION (= (HOUT-ISENTROPIC TURBINE1) (* (CP AIR) (TOUT-ISENTROPIC TURBINE1)))) (NVALUE (CP AIR) 1003.41379310345))).]
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (GAS COOL-IN) (GAS T-IN) (TURBINE TURBINE1 T-IN COOL-IN) (IDEAL-GAS AIR)) (EQUATION (= (HOUT-ISENTROPIC TURBINE1) (* (CP AIR) (TOUT-ISENTROPIC TURBINE1))))).]
+    No interps help with (TOUT-ISENTROPIC TURBINE2).
+===== 140 =============
+  Looking for (SPEC-S COOL2-IN)..
+===== 141 =============
+===== 142 =============
+   Seeing if example can help with (SPEC-S COOL2-IN)..
+    <Mapping 1595> might help, COOL2-IN <-> COOL-IN
+     [Already read (IMPLIES (AND (SUBSTANCE-OF COOL-IN AIR) (IDEAL-GAS AIR)) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN))))))).]
+     [Already read (DERIVED-BY (NVALUE (T COOL-IN) 533.776295185899) (AND (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (NVALUE (P COOL-IN) 100000.0) (EQUATION (= (SPEC-S COOL-IN) (- (* (CP AIR) (LOG (T COOL-IN))) (* (R AIR) (LOG (P COOL-IN)))))) (NVALUE (CP AIR) 1003.41379310345) (NVALUE (R AIR) 8314/29))).]
+     [Already read (IMPLIES (AND (ISENTROPIC TURBINE1) (TURBINE TURBINE1 T-IN COOL-IN)) (EQUATION (= (SPEC-S T-IN) (SPEC-S COOL-IN)))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-S COOL-IN) 3000.77873832294) (AND (NVALUE (SPEC-S T-IN) 3000.77873832294) (EQUATION (= (SPEC-S T-IN) (SPEC-S COOL-IN))))).]
+    No interps help with (SPEC-S COOL2-IN).
+===== 143 =============
+===== 144 =============
+  Looking for (PR TURBINE2)..
+===== 145 =============
+===== 146 =============
+   Seeing if example can help with (PR TURBINE2)..
+    <Mapping 1595> might help, TURBINE2 <-> TURBINE1
+     [Already read (IMPLIES (TURBINE TURBINE1 T-IN COOL-IN) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN))))).]
+     [Already read (DERIVED-BY (NVALUE (P T-IN) 900000.0) (AND (NVALUE (P COOL-IN) 100000.0) (NVALUE (PR TURBINE1) 9.0) (EQUATION (= (PR TURBINE1) (/ (P T-IN) (P COOL-IN)))))).]
+     [Already read (GIVEN (NVALUE (PR TURBINE1) 9.0)).]
+    No interps help with (PR TURBINE2).
+===== 147 =============
+  Looking for (SHAFT-WORK COMPRESSOR2)..
+===== 148 =============
+ Found 1 equations for (SHAFT-WORK COMPRESSOR2).
+  1. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 149 =============
+   Seeing if example can help with (SHAFT-WORK COMPRESSOR2)..
+    <Mapping 1595> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))).]
+     [Already read (DERIVED-BY (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1)))))).]
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1))))).]
+    No interps help with (SHAFT-WORK COMPRESSOR2).
+===== 150 =============
+  Looking for (NET-WORK CYCLE)..
+===== 151 =============
+ Found 3 equations for (NET-WORK CYCLE).
+  1. (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))
+  2. (= (WORK-RATIO CYCLE) (/ (NET-WORK CYCLE) (WORK-OUT CYCLE)))
+  3. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+===== 152 =============
+   Seeing if example can help with (NET-WORK CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (DERIVED-BY (NVALUE (NU-THERMAL CYCLE) 0.466223704814102) (AND (NVALUE (NET-WORK CYCLE) 204887.567574197) (NVALUE (Q-IN CYCLE) 439461.92666435) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))))).]
+     [Already read (IMPLIES (HEAT-ENGINE CYCLE) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE))))).]
+    No interps help with (NET-WORK CYCLE).
+===== 153 =============
+  Looking for (WORK-OUT CYCLE)..
+===== 154 =============
+ Found 3 equations for (WORK-OUT CYCLE).
+  1. (= (WORK-RATIO CYCLE) (/ (NET-WORK CYCLE) (WORK-OUT CYCLE)))
+  2. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  3. (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))
+===== 155 =============
+   Seeing if example can help with (WORK-OUT CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-OUT CYCLE) (THE-SET (SHAFT-WORK TURBINE1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-OUT CYCLE) 467815.29608226) (AND (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1)))))).]
+    No interps help with (WORK-OUT CYCLE).
+===== 156 =============
+  Looking for (WORK-IN CYCLE)..
+===== 157 =============
+ Found 2 equations for (WORK-IN CYCLE).
+  1. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  2. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 158 =============
+   Seeing if example can help with (WORK-IN CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))).]
+    No interps help with (WORK-IN CYCLE).
+===== 159 =============
+  Looking for (SHAFT-WORK COMPRESSOR2)..
+===== 160 =============
+ Found 1 equations for (SHAFT-WORK COMPRESSOR2).
+  1. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 161 =============
+   Seeing if example can help with (SHAFT-WORK COMPRESSOR2)..
+    <Mapping 1595> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))).]
+     [Already read (DERIVED-BY (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1)))))).]
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1))))).]
+    No interps help with (SHAFT-WORK COMPRESSOR2).
+===== 162 =============
+  Looking for (WORK-OUT CYCLE)..
+===== 163 =============
+ Found 3 equations for (WORK-OUT CYCLE).
+  1. (= (WORK-RATIO CYCLE) (/ (NET-WORK CYCLE) (WORK-OUT CYCLE)))
+  2. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  3. (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))
+===== 164 =============
+   Seeing if example can help with (WORK-OUT CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-OUT CYCLE) (THE-SET (SHAFT-WORK TURBINE1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-OUT CYCLE) 467815.29608226) (AND (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1)))))).]
+    No interps help with (WORK-OUT CYCLE).
+===== 165 =============
+  Looking for (NET-WORK CYCLE)..
+===== 166 =============
+ Found 3 equations for (NET-WORK CYCLE).
+  1. (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))
+  2. (= (WORK-RATIO CYCLE) (/ (NET-WORK CYCLE) (WORK-OUT CYCLE)))
+  3. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+===== 167 =============
+   Seeing if example can help with (NET-WORK CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (DERIVED-BY (NVALUE (NU-THERMAL CYCLE) 0.466223704814102) (AND (NVALUE (NET-WORK CYCLE) 204887.567574197) (NVALUE (Q-IN CYCLE) 439461.92666435) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))))).]
+     [Already read (IMPLIES (HEAT-ENGINE CYCLE) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE))))).]
+    No interps help with (NET-WORK CYCLE).
+===== 168 =============
+  Looking for (WORK-OUT CYCLE)..
+===== 169 =============
+ Found 3 equations for (WORK-OUT CYCLE).
+  1. (= (WORK-RATIO CYCLE) (/ (NET-WORK CYCLE) (WORK-OUT CYCLE)))
+  2. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  3. (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE2)))
+===== 170 =============
+   Seeing if example can help with (WORK-OUT CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-OUT CYCLE) (THE-SET (SHAFT-WORK TURBINE1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-OUT CYCLE) 467815.29608226) (AND (NVALUE (SHAFT-WORK TURBINE1) 467815.29608226) (EQUATION (= (WORK-OUT CYCLE) (+ (SHAFT-WORK TURBINE1)))))).]
+    No interps help with (WORK-OUT CYCLE).
+===== 171 =============
+  Looking for (WORK-IN CYCLE)..
+===== 172 =============
+ Found 2 equations for (WORK-IN CYCLE).
+  1. (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))
+  2. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 173 =============
+   Seeing if example can help with (WORK-IN CYCLE)..
+    <Mapping 1595> might help, CYCLE <-> CYCLE
+     [Already read (DERIVED-BY (NVALUE (NET-WORK CYCLE) 204887.567574197) (AND (NVALUE (WORK-IN CYCLE) -262927.728508063) (NVALUE (WORK-OUT CYCLE) 467815.29608226) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE)))))).]
+     [Already read (IMPLIES (THERMODYNAMIC-CYCLE CYCLE) (EQUATION (= (NET-WORK CYCLE) (+ (WORK-IN CYCLE) (WORK-OUT CYCLE))))).]
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))).]
+    No interps help with (WORK-IN CYCLE).
+===== 174 =============
+  Looking for (SHAFT-WORK COMPRESSOR2)..
+===== 175 =============
+ Found 1 equations for (SHAFT-WORK COMPRESSOR2).
+  1. (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR2)))
+===== 176 =============
+   Seeing if example can help with (SHAFT-WORK COMPRESSOR2)..
+    <Mapping 1595> might help, COMPRESSOR2 <-> COMPRESSOR1
+     [Already read (IMPLIES (AND (MEMBERS (WORK-FLOWS-IN CYCLE) (THE-SET (SHAFT-WORK COMPRESSOR1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1))))).]
+     [Already read (DERIVED-BY (NVALUE (WORK-IN CYCLE) -262927.728508063) (AND (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (WORK-IN CYCLE) (+ (SHAFT-WORK COMPRESSOR1)))))).]
+     [Already read (DERIVED-BY (NVALUE (SHAFT-WORK COMPRESSOR1) -262927.728508063) (AND (NVALUE (MASS-FLOW COMPRESSOR1) 1.0) (NVALUE (SPEC-SHAFT-WORK COMPRESSOR1) -262927.728508063) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1)))))).]
+     [Already read (IMPLIES (COMPRESSOR COMPRESSOR1 COMP-IN H-IN) (EQUATION (= (SPEC-SHAFT-WORK COMPRESSOR1) (/ (SHAFT-WORK COMPRESSOR1) (MASS-FLOW COMPRESSOR1))))).]
+    No interps help with (SHAFT-WORK COMPRESSOR2).
+===== 177 =============
+  Looking for (MASS-FLOW COOL2-IN)..
+===== 178 =============
+===== 179 =============
+   Seeing if example can help with (MASS-FLOW COOL2-IN)..
+    <Mapping 1595> might help, COOL2-IN <-> COOL-IN
+  From example: (DERIVED-BY (NVALUE (MASS-FLOW COMP-IN) 1.0) (AND (NVALUE (MASS-FLOW COOL-IN) 1.0) (EQUATION (= (MASS-FLOW COOL-IN) (MASS-FLOW COMP-IN)))))
+     [Already read (DERIVED-BY (NVALUE (MASS-FLOW COOL-IN) 1.0) (AND (NVALUE (MASS-FLOW T-IN) 1.0) (EQUATION (= (MASS-FLOW T-IN) (MASS-FLOW COOL-IN))))).]
+  Extending interpretations..
+    1 interps relevant for (MASS-FLOW COOL2-IN).
+===== 180 =============
+   For (MASS-FLOW COOL2-IN), maybe (= (MASS-FLOW T2-IN) (MASS-FLOW COOL2-IN))..
+   For (MASS-FLOW COOL2-IN), maybe (= (MASS-FLOW COOL2-IN) (MASS-FLOW COMP2-IN))..
+===== 181 =============
+ Attempting to solve equation:
+(= (MASS-FLOW COOL2-IN) 1.0)
+  Found (MASS-FLOW COOL2-IN) = 1.0.
+===== 182 =============
+ Attempting to solve equation:
+(= (MASS-FLOW T2-IN) 1.0)
+  Found (MASS-FLOW T2-IN) = 1.0.
+===== 183 =============
+ Attempting to solve equation:
+(= (MASS-FLOW H2-IN) 1.0)
+  Found (MASS-FLOW H2-IN) = 1.0.
+===== 184 =============
+ Attempting to solve equation:
+(= 1.0 (MASS-FLOW HEATER2))
+  Found (MASS-FLOW HEATER2) = 1.0.
+===== 185 =============
+  Looking for (SPEC-Q HEATER2)..
+===== 186 =============
+===== 187 =============
+   Seeing if example can help with (SPEC-Q HEATER2)..
+    <Mapping 1677> might help, HEATER2 <-> HEATER1
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1))))).]
+     [Already read (DERIVED-BY (NVALUE (Q HEATER1) 439461.92666435) (AND (NVALUE (MASS-FLOW HEATER1) 1.0) (NVALUE (SPEC-Q HEATER1) 439461.92666435) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1)))))).]
+     [Already read (DERIVED-BY (NVALUE (SPEC-Q HEATER1) 439461.92666435) (AND (NVALUE (SPEC-H H-IN) 563951.866439098) (NVALUE (SPEC-H T-IN) 1003413.79310345) (EQUATION (= (SPEC-H T-IN) (+ (SPEC-H H-IN) (SPEC-Q HEATER1)))))).]
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-H T-IN) (+ (SPEC-H H-IN) (SPEC-Q HEATER1))))).]
+    No interps help with (SPEC-Q HEATER2).
+===== 188 =============
+  Looking for (Q-OUT CYCLE)..
+===== 189 =============
+ Found 2 equations for (Q-OUT CYCLE).
+  1. (= (NET-Q CYCLE) (+ (Q-IN CYCLE) (Q-OUT CYCLE)))
+  2. (= (Q-OUT CYCLE) (+ (Q COOLER2)))
+===== 190 =============
+   Seeing if example can help with (Q-OUT CYCLE)..
+    <Mapping 1677> might help, CYCLE <-> CYCLE
+    No interps help with (Q-OUT CYCLE).
+===== 191 =============
+  Looking for (Q COOLER2)..
+===== 192 =============
+ Found 1 equations for (Q COOLER2).
+  1. (= (Q-OUT CYCLE) (+ (Q COOLER2)))
+===== 193 =============
+   Seeing if example can help with (Q COOLER2)..
+    <Mapping 1677> might help, COOLER2 <-> COOLER1
+    No interps help with (Q COOLER2).
+===== 194 =============
+  Looking for (Q HEATER2)..
+===== 195 =============
+ Found 1 equations for (Q HEATER2).
+  1. (= (Q-IN CYCLE) (+ (Q HEATER2)))
+===== 196 =============
+   Seeing if example can help with (Q HEATER2)..
+    <Mapping 1677> might help, HEATER2 <-> HEATER1
+     [Already read (IMPLIES (AND (MEMBERS (HEAT-FLOWS-IN CYCLE) (THE-SET (Q HEATER1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1))))).]
+     [Already read (DERIVED-BY (NVALUE (Q-IN CYCLE) 439461.92666435) (AND (NVALUE (Q HEATER1) 439461.92666435) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1)))))).]
+     [Already read (DERIVED-BY (NVALUE (Q HEATER1) 439461.92666435) (AND (NVALUE (MASS-FLOW HEATER1) 1.0) (NVALUE (SPEC-Q HEATER1) 439461.92666435) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1)))))).]
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1))))).]
+    No interps help with (Q HEATER2).
+===== 197 =============
+  Looking for (Q-IN CYCLE)..
+===== 198 =============
+ Found 3 equations for (Q-IN CYCLE).
+  1. (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))
+  2. (= (NET-Q CYCLE) (+ (Q-IN CYCLE) (Q-OUT CYCLE)))
+  3. (= (Q-IN CYCLE) (+ (Q HEATER2)))
+===== 199 =============
+   Seeing if example can help with (Q-IN CYCLE)..
+    <Mapping 1677> might help, CYCLE <-> CYCLE
+     [Already read (IMPLIES (AND (MEMBERS (HEAT-FLOWS-IN CYCLE) (THE-SET (Q HEATER1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1))))).]
+     [Already read (DERIVED-BY (NVALUE (Q-IN CYCLE) 439461.92666435) (AND (NVALUE (Q HEATER1) 439461.92666435) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1)))))).]
+     [Already read (DERIVED-BY (NVALUE (NU-THERMAL CYCLE) 0.466223704814102) (AND (NVALUE (NET-WORK CYCLE) 204887.567574197) (NVALUE (Q-IN CYCLE) 439461.92666435) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE)))))).]
+     [Already read (IMPLIES (HEAT-ENGINE CYCLE) (EQUATION (= (NU-THERMAL CYCLE) (/ (NET-WORK CYCLE) (Q-IN CYCLE))))).]
+    No interps help with (Q-IN CYCLE).
+===== 200 =============
+  Looking for (Q-OUT CYCLE)..
+===== 201 =============
+ Found 2 equations for (Q-OUT CYCLE).
+  1. (= (NET-Q CYCLE) (+ (Q-IN CYCLE) (Q-OUT CYCLE)))
+  2. (= (Q-OUT CYCLE) (+ (Q COOLER2)))
+===== 202 =============
+   Seeing if example can help with (Q-OUT CYCLE)..
+    <Mapping 1677> might help, CYCLE <-> CYCLE
+    No interps help with (Q-OUT CYCLE).
+===== 203 =============
+  Looking for (Q COOLER2)..
+===== 204 =============
+ Found 1 equations for (Q COOLER2).
+  1. (= (Q-OUT CYCLE) (+ (Q COOLER2)))
+===== 205 =============
+   Seeing if example can help with (Q COOLER2)..
+    <Mapping 1677> might help, COOLER2 <-> COOLER1
+    No interps help with (Q COOLER2).
+===== 206 =============
+  Looking for (Q HEATER2)..
+===== 207 =============
+ Found 1 equations for (Q HEATER2).
+  1. (= (Q-IN CYCLE) (+ (Q HEATER2)))
+===== 208 =============
+   Seeing if example can help with (Q HEATER2)..
+    <Mapping 1677> might help, HEATER2 <-> HEATER1
+     [Already read (IMPLIES (AND (MEMBERS (HEAT-FLOWS-IN CYCLE) (THE-SET (Q HEATER1))) (THERMODYNAMIC-CYCLE CYCLE)) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1))))).]
+     [Already read (DERIVED-BY (NVALUE (Q-IN CYCLE) 439461.92666435) (AND (NVALUE (Q HEATER1) 439461.92666435) (EQUATION (= (Q-IN CYCLE) (+ (Q HEATER1)))))).]
+     [Already read (DERIVED-BY (NVALUE (Q HEATER1) 439461.92666435) (AND (NVALUE (MASS-FLOW HEATER1) 1.0) (NVALUE (SPEC-Q HEATER1) 439461.92666435) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1)))))).]
+     [Already read (IMPLIES (ABSTRACT-HX HEATER1 H-IN T-IN) (EQUATION (= (SPEC-Q HEATER1) (/ (Q HEATER1) (MASS-FLOW HEATER1))))).]
+    No interps help with (Q HEATER2).
+NIL
+> 
+(DRIBBLE)

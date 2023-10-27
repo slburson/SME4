@@ -1,0 +1,80 @@
+;;; -*- syntax: common-lisp; base: 10; mode: lisp; fonts: cptfont -*-
+;;;;  Modified: Sunday, April 29, 2001 at 20:16:21 by forbus
+
+(in-package :common-lisp-user)
+
+;; english text, ta story 5
+;    once there was a small country called zerdia that learned to
+;  make the world's smartest computer.
+;    one day zerdia was attacked by its warlike neighbor,
+;  gagrach.  but the missiles were badly aimed and the attack
+;  failed.  the zerdian government realized that gagrach wanted
+;  zerdian computers so it offered to sell some of its computers to
+;  the country.  the government of gagrach was very pleased.  it
+;  promised never to attack zerdia again.
+
+(sme:defentity zerdia)
+(sme:defentity gagrach)
+(sme:defentity supercomputer)
+(sme:defentity missiles)
+(sme:defentity f)
+(sme:defentity high)
+
+(sme:defdescription ta-5
+       entities   (zerdia gagrach supercomputer missiles f high)
+       expressions (((country zerdia)                           :name isa-country1)
+		    ((small zerdia)                             :name is-small)
+		    ((intelligent zerdia)                       :name is-intelligent)
+		    ((weak zerdia)                              :name is-weak)
+		    ((place zerdia)                             :name isa-place1)
+		    ((peaceful zerdia)                          :name is-peaceful)
+
+		    ((country gagrach)                          :name isa-country2)
+		    ((warlike gagrach)                          :name is-warlike)
+		    ((place gagrach)                            :name isa-place2)
+		    ((powerful gagrach)                         :name is-powerful)
+		    ((large gagrach)                            :name is-large)
+		    ((ignorant gagrach)                         :name is-ignorant)
+
+		    ((asset supercomputer)                      :name isa-asset)
+		    ((useful supercomputer)                     :name is-useful)
+		    ((tangible supercomputer)                   :name is-tangible)
+		    ((large supercomputer)                      :name is-large)
+		    ((expensive supercomputer)                  :name is-expensixe)
+
+		    ((weapon missiles)                          :name are-a-weapon)
+		    ((large missiles)                           :name are-large)
+		    ((ballistic missiles)                       :name are-ballistic)
+		    ((wide missiles)                            :name are-wide)
+		    ((harmful missiles)                         :name are-harmful)
+
+;;		    
+
+		    ((used-for supercomputer missiles )         :name use-supercomputer)
+
+		    ((possess zerdia supercomputer)             :name zerdias-computer)
+		    ((possess gagrach missiles)                 :name gagrachs-missiles)
+
+		    ((not use-supercomputer)                    :name not-use-supercomputer)
+		    ((attack gagrach zerdia)                    :name gagrach-attack)
+		    ((not gagrach-attack)                       :name not-attack)
+		    ((desire gagrach supercomputer)             :name desire-supercomputer)
+		    ((realize zerdia desire-supercomputer)      :name realize-desire)
+		    ((success gagrach-attack)                   :name success-attack)
+		    ((equals success-attack f)                  :name failed-attack)
+		    ((offer zerdia supercomputer gagrach)       :name offer-supercomputer)
+		    ((happiness gagrach)                        :name happiness-gagrach)
+		    ((equals happiness-gagrach high)            :name happy-gagrach)
+		    ((obtain gagrach supercomputer)             :name buy-supercomputer)
+		    ((promise gagrach zerdia not-attack)        :name promise-not-attack)
+
+;; sequence of events
+		    
+		    ((happen gagrach-attack)                    :name e-gagrach-attack)
+		    ((follow gagrach-attack failed-attack)      :name then-failed-attack)
+		    ((cause not-use-supercomputer failed-attack)      :name why-failed-attack)
+		    ((follow failed-attack realize-desire)      :name then-realize)
+		    ((cause realize-desire offer-supercomputer) :name why-offer)
+		    ((follow offer-supercomputer buy-supercomputer)   :name then-buy)
+		    ((cause buy-supercomputer happy-gagrach)    :name why-happy)
+		    ((cause happy-gagrach promise-not-attack)   :name why-promise)))

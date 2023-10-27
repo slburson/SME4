@@ -1,0 +1,29 @@
+;;; -*- Mode: LISP; Syntax: Common-lisp; Base: 10 -*-
+;;; Last edited by ferguson on Tue Jan 18 13:40:27 1994
+
+(in-package :common-lisp-user)
+
+(sme:defentity water :type inanimate)
+(sme:defentity beaker :type inanimate)
+(sme:defentity vial :type inanimate)
+(sme:defentity pipe :type inanimate)
+
+#||
+(sme:defdescription swater-flow
+   ((cause (greater (pressure beaker) (pressure vial))
+	   (flow breaker vial water pipe)))
+   ||#
+   
+(sme:defdescription swater-flow
+	entities (water beaker vial pipe)
+	expressions  (((flow beaker vial water pipe) :name wflow)
+		      ((pressure beaker) :name press-beaker)
+		      ((pressure vial)   :name press-vial)
+		      ((greater press-beaker press-vial) :name >pressure)
+		      ((diameter beaker) :name diam-beaker)
+		      ((diameter vial)   :name diam-vial)
+		      ((greater diam-beaker diam-vial) :name >diameter)
+		      ((clear beaker)   :name clear-beaker)
+		      ((flat-top water) :name flat-water)
+		      ((liquid water)   :name liquid-water)
+		      ((cause >pressure wflow) :name cause-flow)))

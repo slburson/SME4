@@ -1,0 +1,43 @@
+;;; -*- Mode: LISP; Syntax: Common-lisp; Base: 10 -*-
+;;;;  Modified: Sunday, April 29, 2001 at 20:13:55 by forbus
+
+(in-package :COMMON-LISP-USER)
+
+(sme:defentity coffee :type inanimate)
+(sme:defentity ice-cube :type inanimate)
+(sme:defentity bar :type inanimate)
+(sme:defentity heat-flow :type inanimate)
+(sme:defentity pi :type inanimate)
+
+(sme:defdescription heat-flow
+		entities (coffee ice-cube bar heat-flow pi)
+ 		expressions (((heat-path bar) :name heat-path)
+			     ((aligned bar) :name aligned)
+			     ((temperature coffee) :name temp-coffee)
+			     ((temperature ice-cube) :name temp-ice)
+			     ((greater temp-coffee temp-ice) :name >temp)
+		       ((and aligned >temp) :name and-at)
+			     ((active pi) :name active)
+			     ((process-instance pi) :name pi-pi)
+		       ((and active pi-pi) :name and-active-pi)
+			     ((process pi) :name process-pi)
+			     ((equal heat-flow process-pi) :name =hf-pi)
+		       ((implies and-at active) :name implies-active)
+		       ((diff pi) :name diff-pi)
+		       ((sub temp-coffee temp-ice diff-pi) :name sub)
+		       ((and pi-pi =hf-pi) :name and-pi-=hf)
+			     ((flow-rate pi) :name flow-rate)
+		       ((prop flow-rate diff-pi) :name prop-fr-diff)
+			     ((heat coffee) :name heat-coffee)
+			     ((heat ice-cube) :name heat-ice)
+			     ((i- heat-coffee flow-rate) :name i-hc)
+			     ((i+ heat-ice flow-rate) :name i+hi)))
+;		       ((and sub prop-fr-diff) :name and-sub-prop)
+;		       ((and i-hc i+hi) :name and-i+-)
+;		       ((and and-sub-prop and-i+-) :name big-and)
+;		       ((implies and-active-pi big-and) :name implies-aap-ba)
+;		       ((and implies-active implies-aap-ba) :name and->active->aap-ba)
+;		       ((implies and-pi-=hf and->active->aap-ba) :name big-implies)))
+
+
+;(sub a1 a2 diff)

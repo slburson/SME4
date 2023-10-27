@@ -1,0 +1,30 @@
+;; -*- mode: lisp -*- 
+
+;;;; knowledge base for MARS
+;;
+;; last edited 2/5/94, by kdf
+
+(in-package :common-lisp-user)
+
+(sme::defdescription mars-kb
+;; stuff that cyclepad normally derives for every problem. 
+
+;; properties of air
+(nvalue (gamma air) 1.4)
+(nvalue (molar-mass air) 29)
+(nvalue (cv air) 716.7241379310347)
+(nvalue (cp air) 1003.4137931034484)
+(nvalue (r air) 8314/29)	
+;; properties of carbon dioxide (treated as an ideal gas)
+(nvalue (gamma ideal-co2) 1.29)
+(nvalue (cp ideal-co2) 840.3500537899379)
+(nvalue (cv ideal-co2) 651.434150224758)
+(nvalue (molar-mass ideal-co2) 44.009)
+(nvalue (r ideal-co2) 188.91590356517986)
+;; properties of helium 
+(nvalue (gamma helium) 1.67)
+(nvalue (cp helium) 5176.856163847264)
+(nvalue (cv helium) 3099.913870567224)
+(nvalue (molar-mass helium) 4.003)
+(nvalue (r helium) 2076.94229328004)
+)

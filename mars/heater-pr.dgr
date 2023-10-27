@@ -1,0 +1,29 @@
+;; -*- mode: lisp -*-
+
+
+;;;; cyclepad dgroup dump -- date, time
+
+(in-package :common-lisp-user)
+(sme::defdescription heater-problem
+;; parts list
+ (thermodynamic-cycle cycle)
+ (heater heater2 h2-inlet h2-outlet)
+;; stuffs list
+ (thermodynamic-stuff h2-outlet)
+ (thermodynamic-stuff h2-inlet)
+;; physical processes
+ (heat-flow (heat-source heater2) (heat-source heater2) h2-inlet h2-outlet)
+ (fluid-flow h2-inlet h2-outlet)
+;; modeling assumptions.
+ ;; substance and phase information
+ (substance-of h2-outlet helium)
+ (gas h2-outlet)
+ (substance-of h2-inlet helium)
+ (gas h2-inlet)
+;; numerical values
+(nvalue (t h2-outlet) 373.15)
+(nvalue (t h2-inlet) 313.15)
+(nvalue (mass-flow h2-inlet) 2.0)
+(q heater2) ;; mention it for the mapping
+;; rationale for equations
+ )

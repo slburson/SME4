@@ -1,0 +1,15 @@
+;; -*- lisp -*-
+;; description dumped from sme v3r09
+;; created by ron ferguson, using klapacious, a ibm pc at qrg running microsoft windows
+;; 10:07:07 11/19/97
+;;;;  Modified: Sunday, April 29, 2001 at 20:18:53 by forbus
+(sme::defdescription "t5base"
+   :documentation "n-ary commutatives, attribute constrained"
+   :notes ""
+   :expressions 
+     (
+(active bill)
+(authority henry)
+(and henry bill sally)
+     )
+  ) ;; end of description t5base

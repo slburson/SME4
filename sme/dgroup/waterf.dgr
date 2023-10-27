@@ -1,0 +1,37 @@
+;;; -*- Mode: LISP; Syntax: Common-lisp; Base: 10 -*-
+;;;;  Modified: Sunday, April 29, 2001 at 20:13:24 by forbus
+(in-package :COMMON-LISP-USER)
+
+(sme:defentity pipe :type inanimate)
+(sme:defentity fluid-flow :type inanimate)		;????
+(sme:defentity pi :type inanimate)
+(sme:defentity cs-beak :type inanimate)
+(sme:defentity cs-v :type inanimate)
+
+(sme:defdescription water-flow
+		entities (pipe fluid-flow pi cs-beak cs-v)
+		expressions (((fluid-path pipe) :name fluid-path)
+			     ((aligned pipe) :name aligned)
+			     ((pressure cs-beak) :name press-beaker)
+			     ((pressure cs-v) :name press-vial)
+			     ((greater press-beaker press-vial) :name >pressure)
+			     ((and aligned >pressure) :name and-ap)
+			     ((active pi) :name active)
+			     ((process-instance pi) :name pi-pi)
+			     ((and active pi-pi) :name and-active-pi)
+			     ((process pi) :name process-pi)
+			     ((equal fluid-flow process-pi) :name =ff-pi)
+			     ((implies and-ap active) :name implies-active)
+			     ((diff pi) :name diff-pi)
+			     ((sub press-beaker press-vial diff-pi) :name sub)
+			     ((and pi-pi =ff-pi) :name and-pi-=ff)
+			     ((flow-rate pi) :name flow-rate)
+			     ((prop flow-rate diff-pi) :name prop-fr-diff)
+			     ((amount-of cs-beak) :name amount-beaker)
+			     ((amount-of cs-v) :name amount-vial)
+			     ((i- amount-beaker flow-rate) :name i-amount-b)
+			     ((i+ amount-vial flow-rate) :name i+amount-v)
+			     ((and sub prop-fr-diff i-amount-b i+amount-v) :name big-and)
+			     ((implies and-active-pi big-and) :name implies-aap-ba)
+			     ((and implies-active implies-aap-ba) :name and->active->aap-ba)
+			     ((implies and-pi-=ff and->active->aap-ba) :name big-implies)))

@@ -1,0 +1,25 @@
+;;;; -*-  Mode: LISP; Syntax: Common-Lisp; Base: 10                          -*-
+;;;; ---------------------------------------------------------------------------
+;;;; File name: recycler.dgr
+;;;;    System: SME v4
+;;;;   Version: 1.0
+;;;;    Author: Kenneth D. Forbus
+;;;;   Created: May 14, 2007 08:41:26
+;;;;   Purpose: Classic pragmatic marking example (target)
+;;;; ---------------------------------------------------------------------------
+;;;;  Modified: Monday, May 14, 2007 at 09:57:40 by Ken Forbus
+;;;; ---------------------------------------------------------------------------
+(in-package :common-lisp-user)
+
+(defdescription recycler
+ entities (effluent heat-sink heat hx radiation strongtium)
+ expressions ((increased (flow-rate (flow effluent heat-sink heat hx)))
+              (detectable (gives-off effluent radiation))
+              (cause (contains effluent strongtium) (gives-off effluent radiation))
+              (liquid effluent)
+              (flat-top effluent)
+              (greater (temperature effluent) (temperature heat-sink))))
+
+
+;;;; ---------------------------------------------------------------------------
+;;;; End of Code

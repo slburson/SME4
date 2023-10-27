@@ -1,0 +1,112 @@
+;;; -*- syntax: common-lisp; base: 10; mode: lisp; fonts: cptfont -*-
+;;;;  Modified: Sunday, April 29, 2001 at 20:15:42 by forbus
+
+(in-package :common-lisp-user)
+
+;; english text, base story 17
+;     two pioneers, smith and johnson, discovered a gorgeous
+;  little valley that was as yet unclaimed in oregon territory.
+;  each of them wanted the land for himself, so soon they were
+;  fighting over who saw it first.
+;     while they were fighting over it, sheriff jones came along
+;  and divided the land evenly between them.  in the end, smith and
+;  johnson realized that they should have done that on their own.
+;  from that day forward they were the best of friends, and they
+;  helped build each other's houses.
+
+(sme:defentity smith)
+(sme:defentity johnson)
+(sme:defentity valley1)
+(sme:defentity jones)
+(sme:defentity house1)
+(sme:defentity house2)
+
+(sme:defdescription base-17
+          entities   (smith johnson valley1 jones house1 house2)
+          expressions (((male smith)                               :name isa-male1)
+		       ((human smith)                              :name isa-human1)
+		       ((adult smith)                              :name isa-adult1)
+		       ((adventurous smith)                        :name is-adventurous1)
+		       ((pioneer smith)                            :name isa-pioneer1)
+		       ((biped smith)                              :name isa-biped1)
+
+		       ((male johnson)                             :name isa-male2)
+		       ((human johnson)                            :name isa-human2)
+		       ((adult johnson)                            :name isa-adult2)
+		       ((adventurous johnson)                      :name is-adventurous2)	
+		       ((pioneer johnson)                          :name isa-pioneer2)
+		       ((biped johnson)                            :name isa-biped2)	
+
+		       ((male jones)                               :name isa-male3)
+		       ((human jones)                              :name isa-human3)
+                       ((authority jones)                          :name is-authority)
+                       ((sheriff jones)                            :name isa-sheriff)
+                       ((biped jones)                              :name isa-biped3)
+		       ((official jones)                           :name is-official)
+
+                       ((land valley1)                             :name is-land)
+		       ((location valley1)                         :name isa-location)
+		       ((natural valley1)                          :name is-natural)
+		       ((gorgeous valley1)                         :name is-gorgeous)
+		       ((desirable valley1)                        :name is-desirable)
+		       
+		       ((structure house1)                         :name isa-structure1)
+		       ((wooden house1)                            :name is-wooden1)
+
+		       ((structure house2)                         :name isa-structure2)
+		       ((wooden house2)                            :name is-wooden2)
+;;; basic relationships
+		       ((possess smith house1)                     :name smiths-house)
+		       ((possess johnson house2)                   :name johnsons-house)
+		       
+		       ((loc smith)                                :name loc-smith)
+		       ((loc johnson)                              :name loc-johnson)
+		       ((equal loc-smith valley1)                  :name smith-in-valley1)
+		       ((equal loc-johnson valley1)                :name johnson-in-valley1)
+
+                       ((discover smith valley1)                   :name smith-discover)
+                       ((discover johnson valley1)                 :name johnson-discover)
+
+                       ((desire smith valley1)                     :name smith-desire)
+                       ((desire johnson valley1)                   :name johnson-desire)
+
+                       ((fight smith johnson)                      :name fighting-men)
+                       ((arrive jones)                             :name arrive-at-valley)
+                       ((divide-between jones valley1 smith johnson)     :name jones-divide)
+                       ((divide-between smith valley1 smith johnson)     :name smith-divide)
+                       ((divide-between johnson valley1 smith johnson)   :name johnson-divide)
+
+;; new consequences
+		       ((belongs-to smith valley1) :name smith-part-owner)
+		       ((belongs-to johnson valley1) :name johnson-part-owner)
+                       ((same-time smith-divide johnson-divide)    :name st-divide)
+		       ((realize smith st-divide)                  :name smith-realize)
+                       ((realize johnson st-divide)                :name johnson-realize)
+                       ((and smith-realize johnson-realize)        :name both-realize)
+		       ((and house1 house2)                        :name house1-n-house2)
+		       ((build smith house1-n-house2)              :name smith-build)
+		       ((build johnson house1-n-house2)            :name johnson-build)
+		       ((and smith-build johnson-build)            :name both-build)
+
+;;  sequence of events
+                       ((same-time smith-discover johnson-discover):name st-discover)
+		       ((follow smith-discover smith-desire) :name :smith-fdd)
+		       ((follow johnson-discover johnson-desire) :name :johnson-fdd)
+		       ((same-time smith-desire johnson-desire)    :name st-desire)
+		       ((same-time fighting-men arrive-at-valley)  :name fight-arrive) 
+                       ((follow arrive-at-valley jones-divide)     :name then-jones-div)
+                       ((follow jones-divide both-realize)         :name then-both-realize)        
+		       ((follow both-realize both-build)           :name then-both-build)
+
+;;; causal structure
+		       ((and st-discover st-desire)                :name simult)
+                       ((cause simult fighting-men)             :name why-fight)
+                       ((cause fighting-men jones-divide)          :name why-divide)
+		       ((cause jones-divide smith-part-owner)      :name happy1)
+		       ((cause jones-divide johnson-part-owner)      :name happy1)
+                       ((cause jones-divide smith-realize)         :name why-realize-s)
+                       ((cause jones-divide johnson-realize)       :name why-realize-j)
+		     ))
+
+        
+

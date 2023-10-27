@@ -1,0 +1,100 @@
+;; -*- mode: lisp -*-
+
+
+;;;; cyclepad dgroup dump -- 2/6/94, 19:7:39
+;;; worked example, with goal to find t(c1-outlet) = 215.9738c.
+
+(in-package :common-lisp-user)
+(sme::defdescription compressor-example
+;; parts list
+ (thermodynamic-cycle cycle)
+ (compressor compressor1 c1-inlet c1-outlet)
+;; stuffs list
+ (thermodynamic-stuff c1-inlet)
+ (thermodynamic-stuff c1-outlet)
+;; physical processes
+ (fluid-flow c1-inlet c1-outlet)
+ (compression c1-inlet c1-outlet compressor1)
+;; modeling assumptions.
+ (isentropic compressor1)
+ (adiabatic compressor1)
+ (not (isothermal compressor1))
+ (not (polytropic compressor1))
+ (not (non-polytropic compressor1))
+ ;; substance and phase information
+ (substance-of c1-inlet air)
+ (gas c1-inlet)
+ (substance-of c1-outlet air)
+ (gas c1-outlet)
+;; numerical values
+(derived-by (nvalue (t c1-outlet)
+                    489.1238357870137)
+            (and (nvalue (spec-s c1-outlet)
+                         2399.4404731397113)
+                 (nvalue (p c1-outlet) 600000.0)
+                 (equation
+                   (= (spec-s c1-outlet)
+                      (- (* (cp air)
+                            (log (t c1-outlet)))
+                         (* (r air)
+                            (log (p c1-outlet))))))
+                 (nvalue (cp air) 1003.4137931034484)
+                 (nvalue (r air) 8314/29)))
+(given (nvalue (t c1-inlet) 293.15))
+(derived-by (nvalue (spec-s c1-inlet)
+                    2399.4404731397113)
+            (and
+              (equation
+                (= (spec-s c1-inlet)
+                   (- (* (cp air)
+                         (log (t c1-inlet)))
+                      (* (r air)
+                         (log (p c1-inlet))))))
+              (nvalue (p c1-inlet) 100000.0)
+              (nvalue (t c1-inlet) 293.15)
+              (nvalue (cp air) 1003.4137931034484)
+              (nvalue (r air) 8314/29)))
+(derived-by (nvalue (spec-s c1-outlet)
+                    2399.4404731397113)
+            (and (nvalue (spec-s c1-inlet)
+                         2399.4404731397113)
+                 (equation (= (spec-s c1-inlet)
+                              (spec-s c1-outlet)))))
+(given (nvalue (p c1-inlet) 100000.0))
+(given (nvalue (delta-p compressor1)
+               500000.0))
+(derived-by (nvalue (p c1-outlet) 600000.0)
+            (and (nvalue (p c1-inlet) 100000.0)
+                 (nvalue (delta-p compressor1)
+                         500000.0)
+                 (equation
+                   (= (delta-p compressor1)
+                      (- (p c1-outlet) (p c1-inlet))))))
+;; rationale for equations
+(implies (and (substance-of c1-inlet air)
+              (ideal-gas air))
+         (equation
+           (= (spec-s c1-inlet)
+              (- (* (cp air)
+                    (log (t c1-inlet)))
+                 (* (r air)
+                    (log (p c1-inlet)))))))
+(implies
+  (and (isentropic compressor1)
+       (compressor compressor1 c1-inlet c1-outlet))
+  (equation (= (spec-s c1-inlet)
+               (spec-s c1-outlet))))
+(implies (compressor compressor1 c1-inlet c1-outlet)
+         (equation (= (delta-p compressor1)
+                      (- (p c1-outlet) (p c1-inlet)))))
+(implies (and (substance-of c1-outlet air)
+              (ideal-gas air))
+         (equation
+           (= (spec-s c1-outlet)
+              (- (* (cp air)
+                    (log (t c1-outlet)))
+                 (* (r air)
+                    (log (p c1-outlet)))))))
+ )
+
+

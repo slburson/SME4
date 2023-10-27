@@ -1,0 +1,37 @@
+;; -*- Mode: lisp; Package: user -*-
+;;
+
+
+;; This is another attempt to describe the anima.
+;;  This description uses the basic relationships
+;;  established in earlier versions, but merges the
+;;  causal and qualitative descriptions.
+;;
+
+(sme::defdescription anima6
+
+  ;; The sun gives forth anima-motrix.
+  (produce sun anima-motrix)
+
+  ;; The farther away the planet is, the
+  ;;   smaller the concentration of anima motrix.
+  (qprop- (concentration anima-motrix planet)
+	  (distance planet sun))
+
+  ;; The speed of the planet is negatively proportional
+  ;;   to the distance. (added for version 6)
+  (qprop- (speed planet)
+	  (distance planet sun))
+
+  ;; The flow of the anima motrix from the sun to the planet
+  ;;   causes the anima motrix to reach the planet.
+  (cause 
+   (travel anima-motrix sun planet space)
+   (reach anima-motrix planet))
+
+  ;; The anima motrix reaches the planet, promoting
+  ;;   the speed.
+  (cause (reach anima-motrix planet)
+	 (promote (speed planet)))
+
+  )

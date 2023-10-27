@@ -1,0 +1,50 @@
+;; -*- mode: lisp -*-
+
+
+;;;; cyclepad dgroup dump -- 2/6/94, 19:45:28
+;;; problem to be solved, with goal to find t(c2-out) = 114.4082c.
+
+(in-package :common-lisp-user)
+(sme::defdescription compressor-problem-for-mars
+;; parts list
+ (thermodynamic-cycle cycle)
+ (compressor compressor2 c2-in c2-out)
+;; stuffs list
+ (thermodynamic-stuff c2-out)
+ (thermodynamic-stuff c2-in)
+;; physical processes
+ (fluid-flow c2-in c2-out)
+ (compression c2-in c2-out compressor2)
+;; modeling assumptions.
+ (isentropic compressor2)
+ (adiabatic compressor2)
+ (not (isothermal compressor2))
+ (not (polytropic compressor2))
+ (not (non-polytropic compressor2))
+ ;; substance and phase information
+ (substance-of c2-out air)
+ (gas c2-out)
+ (substance-of c2-in air)
+ (gas c2-in)
+;; numerical values
+(given (nvalue (mass-flow c2-in) 1.0))
+(given (nvalue (t c2-in) 283.15))
+(given (nvalue (p c2-in) 100000.0))
+(given (nvalue (p c2-out) 300000.0))
+;; rationale for equations
+(implies
+  (and (members (work-flows-in cycle)
+                (the-set (shaft-work compressor2)))
+       (thermodynamic-cycle cycle))
+  (equation (= (work-in cycle)
+               (+ (shaft-work compressor2)))))
+(implies (thermodynamic-cycle cycle)
+         (equation (= (net-work cycle)
+                      (+ (work-in cycle)
+                         (work-out cycle)))))
+(implies (thermodynamic-cycle cycle)
+         (equation (= (net-q cycle)
+                      (+ (q-in cycle)
+                         (q-out cycle)))))
+ (goal-parameter (t c2-out))
+ )

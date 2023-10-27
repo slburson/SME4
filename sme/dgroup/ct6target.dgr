@@ -1,0 +1,15 @@
+;; -*- lisp -*-
+;; description dumped from sme v3r09
+;; created by ron ferguson, using klapacious, a ibm pc at qrg running microsoft windows
+;; 10:11:23 11/19/97
+;;;;  Modified: Sunday, April 29, 2001 at 20:17:53 by forbus
+(sme::defdescription "t6target"
+   :documentation "target"
+   :notes ""
+   :expressions 
+     (
+(and biff barbara)
+(and biff simon)
+(and barbara simon biff)
+     )
+  ) ;; end of description t6target

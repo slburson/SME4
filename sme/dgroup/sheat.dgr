@@ -1,0 +1,17 @@
+;;; -*- Mode: LISP; Syntax: Common-lisp; Base: 10 -*-
+
+(in-package :common-lisp-user) 
+
+(sme:defentity coffee :type inanimate)
+(sme:defentity ice-cube :type inanimate)
+(sme:defentity bar :type inanimate)
+(sme:defentity heat :type inanimate)
+
+(sme:defdescription sheat-flow
+	entities (coffee ice-cube bar heat)
+	expressions  (((flow coffee ice-cube heat bar) :name hflow)
+		      ((temperature coffee) :name temp-coffee)
+		      ((temperature ice-cube) :name temp-ice-cube)
+		      ((greater temp-coffee temp-ice-cube) :name >temp)
+		      ((flat-top coffee) :name flat-coffee)
+		      ((liquid coffee) :name liquid-coffee)))

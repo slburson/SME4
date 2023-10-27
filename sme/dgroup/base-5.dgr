@@ -1,0 +1,92 @@
+;;; -*- syntax: common-lisp; base: 10; mode: lisp; fonts: cptfont -*-
+;;;;  Modified: Sunday, April 29, 2001 at 20:16:06 by forbus
+
+(in-package :common-lisp-user)
+
+;; english text, base story 5
+;    karla, an old hawk, lived at the top of a tall oak tree.  one
+;  afternoon, she saw a hunter on the ground with a bow and some
+;  crude arrows that had no feathers.  the hunter took aim and shot
+;  at the hawk but missed.  karla knew the hunter wanted her
+;  feathers so she glided down to the hunter and offered to give him
+;  a few.  the hunter was so grateful that he pledged never to shoot
+;  at a hawk again.  he went off and shot deer instead.
+
+
+(sme:defentity karla)
+(sme:defentity man1)
+(sme:defentity feathers)
+(sme:defentity cross-bow)
+(sme:defentity f)
+(sme:defentity high)
+(sme:defentity deer)
+(sme:defentity loc1)
+
+(sme:defdescription base-5
+       entities  (karla man1 feathers cross-bow f high deer loc1)
+       expressions (((bird karla)                            :name isa-bird)
+		    ((hawk karla)                            :name isa-hawk)
+		    ((large karla)                           :name is-large)
+		    ((powerful karla)                        :name is-powerful)
+		    ((black karla)                           :name is-black)
+		    ((predatory karla)                       :name is-predatory)
+
+		    ((male man1)                             :name isa-male)
+		    ((human man1)                            :name isa-human)
+		    ((warlike man1)                          :name is-warlike)
+		    ((hunter man1)                           :name isa-hunter)
+		    ((biped man1)                            :name isa-biped)
+		    ((vocal man1)                            :name is-vocal)
+
+		    ((asset feathers)                        :name are-a-asset)
+		    ((soft feathers)                         :name are-soft)
+		    ((long feathers)                         :name are-long)
+		    ((covering feathers)                     :name are-a-covering)
+		    ((black feathers)                        :name are-black)
+
+		    ((weapon cross-bow)                      :name isa-weapon)
+		    ((wooden cross-bow)                      :name is-wooden)
+		    ((medieval cross-bow)                    :name is-medieval)
+		    ((large cross-bow)                       :name is-large)
+		    ((thin cross-bow)                        :name is-thin)
+
+		    ((mammal deer)                           :name are-mammals)
+		    ((quadriped deer)                        :name are-quadriped)
+		    ((hoofed deer)                           :name are-hoofed)
+		    ((antlered deer)                         :name have-antlers)
+		    ((ruminant deer)                         :name are-ruminants)
+;;		    
+		    ((used-for feathers cross-bow )          :name has-feathers)
+
+		    ((possess karla feathers)                 :name karlas-feathers)
+		    ((possess man1 cross-bow)                 :name hunters-crossbow)
+		    
+		    ((not has-feathers)                      :name not-has-feathers)
+		    ((lives karla loc1)                      :name karlas-home)
+		    ((see karla man1)                        :name see-hunter)
+		    ((attack man1 karla)                     :name hunter-attack)
+		    ((not hunter-attack)                     :name not-attack)
+		    ((desire man1 feathers)                  :name desire-feathers)
+		    ((realize karla desire-feathers )        :name realize-desire)
+		    ((offer karla feathers man1)             :name offer-feathers)
+		    ((obtain man1 feathers)                  :name take-feathers)
+		    ((happiness man1)                        :name happiness-hunter)
+		    ((equals happiness-hunter high)          :name happy-hunter)
+		    ((success hunter-attack)                 :name success-attack)
+		    ((equals success-attack f)               :name failed-attack)
+		    ((promise man1 karla not-attack)         :name promise-not-attack)
+		    ((attack man1 deer)                      :name hunt-deer)
+
+;; sequence of events
+		  
+		    ((happen see-hunter)                     :name e-see-hunter)
+		    ((follow see-hunter hunter-attack)       :name then-attack)
+		    ((follow hunter-attack failed-attack)    :name then-failed-attack)
+		    ((cause not-has-feathers failed-attack)  :name why-failed-attack)
+		    ((follow failed-attack realize-desire)   :name then-realize)
+		    ((cause realize-desire offer-feathers)   :name why-offer)
+		    ((follow offer-feathers take-feathers)   :name then-take)
+		    ((cause take-feathers happy-hunter)      :name why-happy)
+		    ((cause happy-hunter promise-not-attack) :name why-promise)
+		    ((follow promise-not-attack hunt-deer)   :name then-hunt-deer)
+		  ))

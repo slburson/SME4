@@ -1,0 +1,82 @@
+;;; -*- syntax: common-lisp; base: 10; mode: lisp; fonts: cptfont -*-
+;;;;  Modified: Sunday, April 29, 2001 at 20:16:55 by forbus
+
+(in-package :common-lisp-user)
+
+;; english text, ta story 17
+;    betty and norma were walking towards each other, when they
+;  simultaneously discovered a twenty dollar bill on the floor.
+;  both of them wanted the money so soon they are arguing
+;  desperately over who saw it first.
+;    while they were busy arguing, their teacher mrs. lee, came
+;  along, took the money and divided it between them.  then betty
+;  and norma realized that they should have done that themselves.
+
+(sme:defentity betty)
+(sme:defentity norma)
+(sme:defentity twenty-dollars1)
+(sme:defentity mrs-lee)
+
+(sme:defdescription ta-17
+       entities   (betty norma twenty-dollars1 mrs-lee)
+       expressions    (((female betty)                         :name isa-female1)
+		       ((student betty)                        :name isa-student1)
+		       ((young betty)                          :name is-young1)
+		       ((biped betty)                          :name isa-biped1)
+		       ((human betty)                          :name isa-human1)
+		       ((vocal betty)                           :name is-vocal1)
+		       
+		       ((female norma)                         :name isa-female2)
+		       ((student norma)                        :name isa-student2)
+		       ((young norma)                          :name is-young2)	
+		       ((biped norma)                          :name isa-biped2)	
+		       ((human norma)                          :name isa-human2)
+		       ((vocal norma)                          :name is-vocal2)
+
+		       ((female mrs-lee)                       :name isa-female3)
+		       ((human mrs-lee)                        :name isa-human3)
+		       ((old mrs-lee)                          :name is-old)
+		       ((biped mrs-lee)                        :name isa-biped)
+                       ((authority mrs-lee)                    :name isa-authority)
+                       ((teacher mrs-lee)                      :name isa-teacher)
+
+                       ((money twenty-dollars1)                :name is-money)
+		       ((green twenty-dollars1)                :name is-green)
+		       ((small twenty-dollars1)                :name is-small)
+		       ((desirable twenty-dollars1)            :name is-desirable)
+		       ((cash twenty-dollars1)                 :name is-cash)
+
+;;; basic relationships
+                       ((discover betty twenty-dollars1)       :name betty-discover)
+                       ((discover norma twenty-dollars1)       :name norma-discover)
+                       ((desire betty twenty-dollars1)         :name betty-desire)
+                       ((desire norma twenty-dollars1)         :name norma-desire)
+                       ((fight betty norma)                    :name fighting-students)
+                       ((arrive mrs-lee)                       :name arrive-at-school)
+                       ((divide-between mrs-lee twenty-dollars1 betty norma)  :name mrs-lee-divide)
+                       ((divide-between betty twenty-dollars1 betty norma)    :name betty-divide)
+                       ((divide-between norma twenty-dollars1 betty norma)    :name norma-divide)
+		       ((belongs-to betty twenty-dollars1) :name betty-part-owner)
+		       ((belongs-to norma twenty-dollars1) :name norma-part-owner)
+                       ((same-time betty-divide norma-divide)  :name st-divide)
+                       ((realize betty st-divide)              :name betty-realize)
+                       ((realize norma st-divide)              :name norma-realize)
+                       ((and betty-realize norma-realize)      :name both-realize)
+
+;;  sequence of events
+                       ((same-time betty-discover norma-discover)   :name st-discover)
+		       ((follow betty-discover betty-desire) :name betty-fdd)
+		       ((follow norma-discover norma-desire) :name norma-fdd)
+                       ((same-time betty-desire norma-desire)  :name st-desire)
+		       ((same-time fighting-students arrive-at-school)   :name while-fight-arrive)
+                       ((follow arrive-at-school mrs-lee-divide)     :name then-lee-div)
+                       ((follow mrs-lee-divide both-realize)    :name then-both-realize)
+;;; causal structure
+		       ((and st-discover st-desire) :name simul)
+		       ((cause simul fighting-students)    :name why-fight)
+		       ((cause fighting-students mrs-lee-divide)     :name why-divide)
+		       ((cause mrs-lee-divide betty-part-owner) :name betty-wins)
+		       ((cause mrs-lee-divide norma-part-owner) :name norma-wins)
+                       ((cause mrs-lee-divide betty-realize)    :name why-realize-b)
+                       ((cause mrs-lee-divide norma-realize)    :name why-realize-n)
+		     ))

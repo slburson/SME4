@@ -1,0 +1,22 @@
+;;; -*- Mode: LISP; Syntax: Common-lisp; Base: 10 -*-
+;;;;  Modified: ferguson on Thurs May 1 19:34:14 1997
+(in-package :common-lisp-user)
+
+(sme:defentity nucleus :type inanimate)
+(sme:defentity electron :type inanimate)
+
+(sme:defdescription rutherford-atom
+        documentation "A simple description of Rutherford's model of the atom"
+	entities (nucleus electron)
+	expressions  (((mass nucleus) :name mass-n)
+		      ((mass electron) :name mass-e)
+		      ((greater mass-n mass-e) :name >mass)
+		      ((attracts nucleus electron) :name attracts-form)
+		      ((revolve-around electron nucleus) :name revolve)
+		      ((charge electron) :name q-electron)
+		      ((charge nucleus) :name q-nucleus)
+		      ((opposite-sign q-nucleus q-electron) :name >charge)
+		      ((cause >charge attracts-form) :name why-attracts)))
+
+;		((and >mass attracts-form) :name and1)))
+;		((cause and1 revolve) :name cause-revolve)))

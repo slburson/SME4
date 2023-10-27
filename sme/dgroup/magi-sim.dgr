@@ -1,0 +1,33 @@
+;;;
+;;; A simple description of The Gift of the Magi
+;;;
+
+(sme:defEntity chain)
+(sme:defEntity watch)
+(sme:defEntity husband)
+(sme:defEntity wife)
+(sme:defEntity hair)
+(sme:defEntity comb)
+
+(sme:defdescription Gift-of-the-Magi
+    entities (chain watch husband wife hair comb)
+    expressions (((expensive chain) :name expensive-chain)
+		 ((poss husband chain) :name husband-owns-chain)
+		 ((attached chain watch) :name chain-attached-to-watch)
+		 ((poss husband watch) :name husband-owns-watch)
+		 ((sell husband watch) :name husband-sells-watch)
+		 ((purchase husband comb) :name husband-buys-comb)
+		 ((poss husband chain) :name husband-owns-chain)
+		 ((spouse-of husband wife) :name husband-spouse-of-wife)
+		 ((spouse-of wife husband) :name wife-spouse-of-husband)
+		 ((poss wife hair) :name wife-owns-hair)
+		 ((sell wife hair) :name wife-sells-hair)
+		 ((attached comb hair) :name hair-held-by-comb)
+		 ((poss wife comb) :name wife-owns-comb)
+		 ((expensive comb) :name expensive-comb)
+		 ((purchase wife chain) :name wife-buys-chain)
+		 ((cause husband-sells-watch husband-buys-comb) :name sells-watch-to-buy-comb)
+		 ((motive sells-watch-to-buy-comb wife-owns-comb) :name motive-give-comb-to-wife)
+		 ((cause wife-sells-hair wife-buys-chain) :name sells-hair-to-buy-chain)
+		 ((motive sells-hair-to-buy-chain husband-owns-chain) :name motive-give-chain-to-husband)))
+

@@ -1,0 +1,77 @@
+;; -*- Mode: Lisp;
+;;
+;; A fifth attempt at modeling the movement of light
+;;   from a light source to an object.  The light
+;;   source in this case is the sun.
+;;
+;; Last modified:  6/11/92 by RWF
+;;
+
+(sme::defdescription light6
+  ;;
+  ;; The sun produces light.
+  (produce sun light)
+
+  ;; The brightness of the object is qualitatively
+  ;;   proportional to the concentration of light.
+  (qprop+ (brightness object)
+	  (concentration light object))
+
+  ;; The farther away the object is from the sun,
+  ;;   the lower the concentration of light.
+  (qprop- (concentration light object)
+	  (distance object sun))
+
+  ;; These two facts imply that the farther
+  ;;   away the object is, the less bright it is.
+  ;;
+  (implies (and (qprop- (concentration light object)
+			(distance object sun))
+		(qprop+ (brightness object)
+			(concentration light object)))
+	   (qprop- (brightness object)
+		   (distance object sun)))
+
+
+  ;; Light travelling from the sun to the object causes
+  ;;   light to reach the object.
+  (cause (travel light sun object space)
+	 (reach light object))
+
+  ;; Light reaching the object promotes brightness.
+  (cause (reach light object)
+         (promote (brightness object)))
+
+  ;; Light moves instantaeously (very very fast).
+  (instantaneous (travel light sun object space))
+
+  ;; Light reaching the object determines if the light
+  ;;  is detectable.
+  ;; While the light is travelling to, but not reaching the
+  ;;  planet, the light is not detectable.
+  (while (and (travel light sun object space)
+              (not (reach light object)))
+      (not (detectable light)))
+
+  ;; When it reaches the planet, it is detectable.
+  (while (and (travel light sun object space)
+	      (reach light object))
+    (detectable light))
+
+  ;; 1) The volume of the path in space increases with
+  ;;     the distance of the object.
+  ;; 2) The concentration of light also goes down with
+  ;;     the distance.
+  ;; These two facts cause the product of the volume
+  ;;   of space and the concentration of light to
+  ;;   remain constant.
+  ;;
+  (cause (and (qprop+ (volume space)
+		      (distance sun object))
+	      (qprop- (concentration light object)
+		      (distance object sun)))
+	 (constant (* (volume space)
+		      (concentration light object))))
+
+
+)

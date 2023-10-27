@@ -1,0 +1,21 @@
+;;; -*- Mode: LISP; Syntax: Common-lisp; Package: USER; Base: 10 -*-
+
+(in-package :common-lisp-user)
+
+(sme:defentity sun :type inanimate)
+(sme:defentity planet :type inanimate)
+
+(sme:defdescription solar-system
+	entities (sun planet)
+	expressions  (((mass sun) :name mass-sun)
+		      ((mass planet) :name mass-planet)
+		      ((greater mass-sun mass-planet) :name >mass)
+		      ((attracts sun planet) :name attracts-form)
+		      ((revolve-around planet sun) :name revolve)
+		      ((and >mass attracts-form) :name and1)
+		      ((cause and1 revolve) :name cause-revolve)
+		      ((temperature sun) :name temp-sun)
+		      ((temperature planet) :name temp-planet)
+		      ((greater temp-sun temp-planet) :name >temp)
+		      ((gravity mass-sun mass-planet) :name force-gravity)
+		      ((cause force-gravity attracts-form) :name why-attracts)))
