@@ -1,4 +1,4 @@
-;;;; -*- Mode: Lisp; Mode: Outline; -*-
+;;;; -*- Mode: Lisp; Package: SME -*-
 ;;;; ------------------------------------------------------------
 ;;;; File name: se.lsp
 ;;;;    System: SME
@@ -128,28 +128,26 @@
    set of parent match hypotheses that do not violate the one-to-one mapping constraint."
   (let ((base-items)
         (target-items))
-    (with-slots (base-item target-item score) mh
-      (with-slots (functor-trickle-down? same-function sme-functor
-                                         trickle-down max-local-score
-                                         minimal-ascension-multiplier) params
-        
-        (when (and (member mh mhs)
-                   (or functor-trickle-down? (not (eq (rationale mh) :functor-match))))
-          (dolist (parent (sort (copy-list (parents mh)) #'> :key #'score))
-            (when (and (member parent mhs)
-                       (not (or (member (base-item parent) base-items)
-                                (member (target-item parent) target-items))))
-              
-              (push (base-item parent) base-items)
-              (push (target-item parent) target-items)
-              (add-evidence mh (* trickle-down (score parent)) 
-                            max-local-score minimal-ascension-multiplier))))))))
+    (with-slots (functor-trickle-down? same-function sme-functor
+                                       trickle-down max-local-score
+                                       minimal-ascension-multiplier) params
+      
+      (when (and (member mh mhs)
+                 (or functor-trickle-down? (not (eq (rationale mh) :functor-match))))
+        (dolist (parent (sort (copy-list (parents mh)) #'> :key #'score))
+          (when (and (member parent mhs)
+                     (not (or (member (base-item parent) base-items)
+                              (member (target-item parent) target-items))))
+            
+            (push (base-item parent) base-items)
+            (push (target-item parent) target-items)
+            (add-evidence mh (* trickle-down (score parent)) 
+                          max-local-score minimal-ascension-multiplier)))))))
 
 (defmethod apply-trickle-down ((mh role-relation-match-hypothesis)
                                (params parameters) (mhs list) &optional global?)
   (declare (ignore global?))
   ;; Pass it down to the reified entity, but not to the filler.  That happens later.
-  (declare (ignore one-to-one?))
   (with-slots (base-item target-item score) mh
     (with-slots (max-local-score minimal-ascension-multiplier) params
       (when (and (expression? base-item) (expression? target-item))

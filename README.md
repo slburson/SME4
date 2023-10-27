@@ -10,8 +10,12 @@ I am making some changes to it for my own purposes:
   [ASDF](https://asdf.common-lisp.dev/).  This will make it loadable with Quicklisp; I
   plan to submit it to Zach for public accessibility.
 
-- Making it play a little better with other Lisp code, e.g., so it doesn't add nicknames
-  to package `common-lisp-user`.
+- Building it on SBCL, ABCL, and possibly others.
+
+- Making it play better with other Lisp code, e.g., so it doesn't add symbols to package
+  `common-lisp-user`, or add nicknames for that package.  I have moved the functions and
+  variables that were in `common-lisp-user` to a new package `sme-user`, except for those
+  that were marked as `data::`, which I have moved to a new package `sme-data`.
 
 - Replacing its homegrown set implementation, which has O(n) insertion, with FSet; this
   should make it faster, though I haven't analyzed it to see how large the sets get.

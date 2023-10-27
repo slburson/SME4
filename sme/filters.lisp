@@ -39,8 +39,8 @@
 (defun identical-functions-exp? (exp)
   ;; The comma versus camelCase distinctions are for backward
   ;; compatibility with older external knowledge and reasoning systems
-  (or (eq (car exp) 'data::identical-functions)
-      (eq (car exp) 'data::identicalFunctions)))
+  (or (eq (car exp) 'sme-data::identical-functions)
+      (eq (car exp) 'sme-data::identicalFunctions)))
 
 (defmethod sme-filter-violated? ((mapping mapping) (filter identical-functions-filter))
    (some #'(lambda (mh)
@@ -65,8 +65,8 @@
     (target-item :reader target-item :initarg :target-item)))
 
 (defun required-correspondence-exp? (exp)
-  (or (eq (car exp) 'data::required-correspondence)
-      (eq (car exp) 'data::requiredCorrespondence)))
+  (or (eq (car exp) 'sme-data::required-correspondence)
+      (eq (car exp) 'sme-data::requiredCorrespondence)))
 
 (defmethod sme-filter-violated? ((mapping mapping) 
                                  (filter required-correspondence-filter))
@@ -90,8 +90,8 @@
      (target-item :reader target-item :initarg :target-item)))
 
 (defun excluded-correspondence-exp? (exp)
-  (or (eq (car exp) 'data::excluded-correspondence)
-      (eq (car exp) 'data::excludedCorrespondence)))
+  (or (eq (car exp) 'sme-data::excluded-correspondence)
+      (eq (car exp) 'sme-data::excludedCorrespondence)))
     
 (defmethod sme-filter-violated? ((mapping mapping)
                                  (filter excluded-correspondence-filter))
@@ -117,8 +117,8 @@
 
 (defmethod exclude-cross-partition-correspondences-exp? (exp)
   (and (consp exp)
-       (or (eq (car exp) 'data::excludeCross-PartitionCorrespondences)
-           (eq (car exp) 'data::exclude-cross-partition-correspondences))))
+       (or (eq (car exp) 'sme-data::excludeCross-PartitionCorrespondences)
+           (eq (car exp) 'sme-data::exclude-cross-partition-correspondences))))
 
 (defmethod sme-filter-violated? ((mapping mapping)
                                  (filter exclude-cross-partition-correspondences))
@@ -145,8 +145,8 @@
 
 (defmethod require-within-partition-correspondences-exp? (exp) 
   (and (consp exp)
-       (or (eq (car exp) 'data::requireWithinPartitionCorrespondences)
-           (eq (car exp) 'data::require-within-partition-correspondences))))
+       (or (eq (car exp) 'sme-data::requireWithinPartitionCorrespondences)
+           (eq (car exp) 'sme-data::require-within-partition-correspondences))))
 
 (defmethod sme-filter-violated? ((mapping mapping)
                                  (filter require-within-partition-correspondences))
@@ -179,28 +179,28 @@
   
 (defmethod filter-list-form ((filter excluded-correspondence-filter)
                              &optional (mixed-case? t))
-  (list (if mixed-case? 'data::excludedCorrespondence 'data::excluded-correspondence)
+  (list (if mixed-case? 'sme-data::excludedCorrespondence 'sme-data::excluded-correspondence)
         (user-form (base-item filter)) (user-form (target-item filter))))
                               
 (defmethod filter-list-form ((filter identical-functions-filter)
                              &optional mixed-case?)
-  (list (if mixed-case? 'data::identicalFunctions 'data::identical-functions)))
+  (list (if mixed-case? 'sme-data::identicalFunctions 'sme-data::identical-functions)))
                                                                                                                                                             
 (defmethod filter-list-form ((filter required-correspondence-filter)
                              &optional (mixed-case? t))
-  (list (if mixed-case? 'data::requiredCorrespondence 'data::required-correspondence)
+  (list (if mixed-case? 'sme-data::requiredCorrespondence 'sme-data::required-correspondence)
         (user-form (base-item filter)) (user-form (target-item filter))))
 
 (defmethod filter-list-form ((filter exclude-cross-partition-correspondences)
                              &optional (mixed-case? t))
-  (list (if mixed-case? 'data::excludeCross-PartitionCorrespondences
-          'data::exclude-cross-partition-correspondences)
+  (list (if mixed-case? 'sme-data::excludeCross-PartitionCorrespondences
+          'sme-data::exclude-cross-partition-correspondences)
         (mapcar 'lisp-form (partitions filter))))
 
 (defmethod filter-list-form ((filter require-within-partition-correspondences)
                              &optional (mixed-case? t))
-  (list (if mixed-case? 'data::requireWithinPartitionCorrespondences
-          'data::require-within-partition-correspondences) (lisp-form (partition filter))))
+  (list (if mixed-case? 'sme-data::requireWithinPartitionCorrespondences
+          'sme-data::require-within-partition-correspondences) (lisp-form (partition filter))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

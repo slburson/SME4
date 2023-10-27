@@ -1,4 +1,4 @@
-;;;; -*- Mode: LISP; Syntax: Common-Lisp; Base: 10;                         -*-
+;;;; -*- Mode: LISP; Package: SME -*-
 ;;;; --------------------------------------------------------------------------
 ;;;; File name: test.lsp
 ;;;;    System: SME
@@ -171,7 +171,9 @@
    "Load the set of SME tests in the given test file, and set 
    *sme-tests* to those tests."
    (setq *sme-tests* nil)
-   (qrg:load-file path test-file)
+   ;; (qrg:load-file path test-file)
+   ;; I didn't want to bring in the QRG file-loading code, so I replaced the above with:
+   (load (merge-pathnames test-file path))
    (setq *sme-tests* (nreverse *sme-tests*))
    *sme-tests*)
 
@@ -243,7 +245,7 @@
      (with-test-parameters sme-test
       (let* ((sme (define-sme (dgroup-from-file base-filename)
                     (dgroup-from-file target-filename) :sme-type sme-type)))
-         (cl-user::gc)
+         (sme-user::gc)
          (setf (execution-time sme-test)
                (return-time (match sme)))
         (format t " (~A s)" (execution-time sme-test))

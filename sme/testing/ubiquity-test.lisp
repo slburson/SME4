@@ -10,7 +10,7 @@
 ;;;;  $LastChangedDate: 2012-01-16 17:38:54 -0600 (Mon, 16 Jan 2012) $
 ;;;;  $LastChangedBy: usher $
 ;;;; ---------------------------------------------------------------------------
-(in-package :common-lisp-user)
+(in-package :sme-user)
 
 ;;;; Looks at effects of ubiquitous predicates.
 ;;;; Tricky, because not having the right ubiquitous predicates

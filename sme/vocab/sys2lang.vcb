@@ -3,8 +3,7 @@
 ;;;; File name: sys2lang.lsp
 
 ;;;; Predicate language definition file
-#-symbolics
-(in-package :common-lisp-user)		;defpackage
+(in-package :sme-data)
 
 
 #|  ***** leave type definitions commented out for now. *******

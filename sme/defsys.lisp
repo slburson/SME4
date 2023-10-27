@@ -1,4 +1,4 @@
-;;; -*- Mode: Lisp; Mode: Outline; -*-
+;;; -*- Mode: Lisp -*-
 ;;;; ------------------------------------------------------------
 ;;;; File name: defsys.lsp
 ;;;;    System: SME
@@ -23,32 +23,23 @@
      #+lucid        (:use :common-lisp :lucid-common-lisp :clos :qrg)
      #+(or acl5 acl6) (:use :common-lisp :qrg )
      #+acl3.0       (:use :common-lisp :common-graphics :qrg)
-     #+mcl          (:use :common-lisp :qrg)
-     #+(not (or lucid allegro aclpc mcl))
-                    (error "Defsys not set up for this environment.")
+     #-(or lucid allegro aclpc mcl)
+                    (:use :common-lisp :qrg)
      )))
 
 (eval-when (compile load eval)
-  (unless (find-package :sme-project)
-     (defpackage :sme-project
+  (unless (find-package :sme-user)
+     (defpackage :sme-user
        #+(or mcl allegro) (:use :qrg :common-lisp :clos :sme)
        #+lucid   (:use :qrg :common-lisp :clos :sme)
-       #+aclpc   (:use :qrg :common-lisp :allegro :sme))))
+       #+aclpc   (:use :qrg :common-lisp :allegro :sme)
+       #-(or mcl allegro lucid aclpc)
+                 (:use :qrg :common-lisp :sme))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Set up packages
-
-
-;;Provide the ability to move data to a separate package in the future.
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (unless (find-package :data)
-    (rename-package (find-package :cl-user)
-                    :common-lisp-user  ;keep name the same
-                    '(:cl-user :user  ;replace standard nicknames
-                               :data))))        ;add a new nickname
-
-
 
 ;;; Don't make SME symbols available in CL-USER (although the top-level
 ;;;  routines will be made available.

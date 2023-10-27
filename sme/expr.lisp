@@ -296,7 +296,6 @@
 ;;;
 ;;; In general, we assume args is a list, in some appropriate format.
 
-(defvar *_building-attribute-value* nil)
 ;;when you are sure that 
 ;;(predicate-has-attribute-value-slots? (name pred) (vocabulary description))
 ;;will return nil, can turn this to nil to avoid checking for better efficiency.

@@ -1,4 +1,4 @@
-;;;; -*-  Mode: LISP; Syntax: Common-Lisp; Base: 10                          -*-
+;;;; -*-  Mode: LISP; Package: SME-USER -*-
 ;;;; ---------------------------------------------------------------------------
 ;;;; File name: alist-template-data.lsp
 ;;;;    System: SME v4
@@ -10,7 +10,7 @@
 ;;;;  $LastChangedBy: forbus $
 ;;;; ---------------------------------------------------------------------------
 
-(in-package :cl-user)
+(in-package :sme-user)
 
 ;;;; In low-level data gathering, alists are often the representation of choice because
 ;;;; there are often a few to a dozen analyses one wishes to do, with the same analysis

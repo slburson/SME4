@@ -1,4 +1,4 @@
-;;;; -*- Mode: LISP; Syntax: Common-Lisp; Base: 10;                         -*-
+;;;; -*- Mode: LISP; Package: SME-USER -*-
 ;;;; --------------------------------------------------------------------------
 ;;;; File name: charsme
 ;;;;    System: SME
@@ -11,7 +11,7 @@
 ;;;; Character-oriented interface for SME 4.  Uses cmenu system.
 ;;;; Useful for simple interactive experimentation.
 
-(in-package :common-lisp-user)
+(in-package :sme-user)
 
 ;;; Global Variables
 ;;; ----------------------------------------------------------------------------
@@ -19,10 +19,6 @@
 (defvar *charsme-current-target* nil  "Menu's current target description")
 (defvar *charsme-current-base* nil    "Menu's current base description")
 (defvar *charsme-vocabulary-file* nil "Vocabulary file for menu system")
-
-;; cmenu Special variables
-(eval-when (compile load eval)
-  (proclaim '(special *cmenu-prompt* *sme-command-menu* *menu-stream*)))
 
 (defun reinit-charsme ()
    "Reinitialize important SME character interface varables."
@@ -47,7 +43,7 @@
    "Top-level routine for SME character interface.  This is the old
     SME character interface.  For the alpha version of the new 
     character interface, see the routine NEW-SME-TOPLEVEL."
-   (let ((cl-user::*cmenu-prompt* "SME >>"))
+   (let ((*cmenu-prompt* "SME >>"))
       (run-command-menu *sme-command-menu* "SME: Toplevel Menu")))
 
 (defun get-description-path ()

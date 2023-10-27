@@ -10,7 +10,7 @@
 ;;;;  $LastChangedDate: 2014-10-07 16:06:51 -0500 (Tue, 07 Oct 2014) $
 ;;;;  $LastChangedBy: forbus $
 ;;;; ---------------------------------------------------------------------------
-(in-package :common-lisp-user)
+(in-package :sme-user)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Statistics on dehydrated SMEs 

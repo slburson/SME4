@@ -1,4 +1,4 @@
-;;;; -*-  Mode: LISP; Syntax: Common-Lisp; Base: 10                          -*-
+;;;; -*-  Mode: LISP; Package: SME-USER -*-
 ;;;; ---------------------------------------------------------------------------
 ;;;; File name: test-stand.lsp
 ;;;;    System: SME
@@ -10,7 +10,7 @@
 ;;;;  $LastChangedDate: 2016-01-24 $
 ;;;;  $LastChangedBy: ferguson $
 ;;;; ---------------------------------------------------------------------------
-(in-package :common-lisp-user)
+(in-package :sme-user)
 
 ;;;; Doing empirical complexity analyses of SME's operations requires 
 ;;;; an efficient means of data collection.  These routines provide that

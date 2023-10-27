@@ -212,13 +212,13 @@
 
 (defmethod make-sme-predicate-entry (predicate-name vocab)
   (cond ((listp predicate-name)
-         (cond ((eq (car predicate-name) 'data::lambda)
+         (cond ((eq (car predicate-name) 'sme-data::lambda)
                 ;; (lambda (arglist) <body>)
                 (define-sme-predicate predicate-name (cadr predicate-name)
                   :function (length (cadr predicate-name))
                   nil vocab)) ;; assume not commutative
-               ((or (eq (car predicate-name) 'data::kappa)
-                    (eq (car predicate-name) 'data::Kappa))
+               ((or (eq (car predicate-name) 'sme-data::kappa)
+                    (eq (car predicate-name) 'sme-data::Kappa))
                 (define-sme-predicate predicate-name (cadr predicate-name)
                   :relation (length (cadr predicate-name))
                   nil vocab)) ;; assume not commutative

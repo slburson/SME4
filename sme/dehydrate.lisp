@@ -218,8 +218,8 @@
 (defun isas->attributes (thing)
   (cond ((null thing) nil)
         ((not (listp thing)) (case-preservation-wrap-exp thing))
-        ((eq (car thing) 'data::isa) (list (case-preservation-wrap-exp (third thing))
-                                           (case-preservation-wrap-exp (cadr thing))))
+        ((eq (car thing) 'sme-data::isa) (list (case-preservation-wrap-exp (third thing))
+                                               (case-preservation-wrap-exp (cadr thing))))
         (t (cons (isas->attributes (car thing))
                  (isas->attributes (cdr thing))))))
 

@@ -11,15 +11,13 @@
 ;;;;             without the machine-specific aspects.
 ;;;;
 ;;;; ----------------------------------------------------------------------------
-(in-package :common-lisp-user)
+(in-package :sme-user)
 
 (defvar *line-length* 80 "The line length of the terminal being used.")
 (defvar *help-key* '? "Standard help key.") ;; can be re-bound
 (defvar *abort-key* 'q "Standard abort key.")
 (defvar *menu-stream* *standard-output* "Standard stream for menu system")
 (defvar *cmenu-prompt* ">->" "Prompt used for menu items.")
-(eval-when (compile load eval)
-  (proclaim '(special *cmenu-prompt*))) ;; can be lambda-bound.
 
 ;;;; Basic choice menu
 ;;; ----------------------------------------------------------------------------
