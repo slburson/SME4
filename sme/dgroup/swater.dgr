@@ -1,7 +1,7 @@
-;;; -*- Mode: LISP; Syntax: Common-lisp; Base: 10 -*-
+;;; -*- Mode: LISP; Package: SME-DATA -*-
 ;;; Last edited by ferguson on Tue Jan 18 13:40:27 1994
 
-(in-package :common-lisp-user)
+(in-package :sme-data)
 
 (sme:defentity water :type inanimate)
 (sme:defentity beaker :type inanimate)

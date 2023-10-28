@@ -314,7 +314,8 @@
                      name
                      (if (search *sme-vocabulary-extension* name
                                  :test 'string-equal)
-                         "" (format nil ".~A" *sme-vocabulary-extension*)))))
+                         "" (format nil ".~A" *sme-vocabulary-extension*))))
+	(*package* (find-package :sme-data)))
         (when (integerp depth)
           (setf (minimal-ascension-depth vocabulary) depth))
     (with-vocabulary vocabulary (load-sme-data file-name))

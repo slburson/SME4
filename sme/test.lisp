@@ -164,7 +164,7 @@
           :vocabulary-filename vocab
           :sme-tests sme-forms
           :mapping-tests mapping-forms))
-      (push sme-test *sme-tests*)
+      (fset:push-last *sme-tests* sme-test)
       sme-test))
 
 (defun load-sme-tests (test-file &optional (path *sme-path*))
@@ -174,7 +174,6 @@
    ;; (qrg:load-file path test-file)
    ;; I didn't want to bring in the QRG file-loading code, so I replaced the above with:
    (load (merge-pathnames test-file path))
-   (setq *sme-tests* (nreverse *sme-tests*))
    *sme-tests*)
 
 ;;; sme-shakedown (entry point)

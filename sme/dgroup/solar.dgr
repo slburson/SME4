@@ -1,6 +1,6 @@
-;;; -*- Mode: LISP; Syntax: Common-lisp; Package: USER; Base: 10 -*-
+;;; -*- Mode: LISP; Package: SME-DATA -*-
 
-(in-package :common-lisp-user)
+(in-package :sme-data)
 
 (sme:defentity sun :type inanimate)
 (sme:defentity planet :type inanimate)

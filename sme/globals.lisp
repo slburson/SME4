@@ -5,7 +5,7 @@
 (defparameter *sme-version* "v4" "Current version of SME.")
 (defvar *wildcard*  "*" "Wildcard variable for this particular operating system.")
 
-(defparameter *sme-path* (qrg:make-qrg-path *sme-version*)
+(defparameter *sme-path* (qrg:make-qrg-path "sme")
    "Path for SME source code.  This directory needs to be set
     in the defsys.lsp file before it, or SME, is loaded.")
 

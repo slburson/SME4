@@ -1,4 +1,4 @@
-;;;; -*-  Mode: LISP; Syntax: Common-Lisp; Base: 10                          -*-
+;;;; -*-  Mode: LISP; Package: SME -*-
 ;;;; ---------------------------------------------------------------------------
 ;;;; File name: defs.lsp
 ;;;;    System: SME

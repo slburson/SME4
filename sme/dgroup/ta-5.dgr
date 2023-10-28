@@ -1,7 +1,7 @@
-;;; -*- syntax: common-lisp; base: 10; mode: lisp; fonts: cptfont -*-
+;;; -*- Mode: LISP; Package: SME-DATA -*-
 ;;;;  Modified: Sunday, April 29, 2001 at 20:16:21 by forbus
 
-(in-package :common-lisp-user)
+(in-package :sme-data)
 
 ;; english text, ta story 5
 ;    once there was a small country called zerdia that learned to

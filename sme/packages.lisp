@@ -143,5 +143,7 @@
   #-(or mcl allegro lucid aclpc) (:use :qrg :common-lisp :cl-user :sme :qrg)
   (:import-from :cl-user #:gc)) ; do all implementations have this?
 
-(defpackage :sme-data (:use))
+(defpackage :sme-data
+  (:use)
+  (:import-from :cl #:t #:nil))
 

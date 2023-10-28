@@ -1,4 +1,4 @@
-;;;; -*- Mode: LISP; Syntax: Common-Lisp; Base: 10;                         -*-
+;;;; -*- Mode: LISP; Package: SME -*-
 ;;;; --------------------------------------------------------------------------
 ;;;; File name: dgroup.lsp
 ;;;;    System: SME
@@ -63,12 +63,13 @@
 
 (defun dgroup-from-file (file-name)
   (with-vocabulary *vocabulary*
-    (load-sme-data 
-     (format nil "~A~A~A" *sme-description-path*
-       file-name
-       (if (search *sme-description-extension* file-name)
-           "" ;; already there
-         (format nil ".~A" *sme-description-extension*))))))
+    (let ((*package* (find-package ':sme-data)))
+      (load-sme-data
+       (format nil "~A~A~A" *sme-description-path*
+	       file-name
+	       (if (search *sme-description-extension* file-name)
+		   "" ;; already there
+		 (format nil ".~A" *sme-description-extension*)))))))
 
 ;; Following used by MARS.
 (defmacro with-description-file-information (pathname extension &rest body)

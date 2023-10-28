@@ -1,4 +1,4 @@
-;;;; -*-  Mode: LISP; Syntax: Common-Lisp; Base: 10                          -*-
+;;; -*- Mode: LISP; Package: SME-DATA -*-
 ;;;; ---------------------------------------------------------------------------
 ;;;; File name: still.dgr
 ;;;;    System: SME v4
@@ -9,9 +9,9 @@
 ;;;; ---------------------------------------------------------------------------
 ;;;;  modified: Wednesday, December 5, 2007 at 21:05:57 by Ken Forbus
 ;;;; ---------------------------------------------------------------------------
-(in-package :common-lisp-user)
+(in-package :sme-data)
 
-(defdescription still
+(sme:defdescription still
     entities (litmus32 alcohol-vapor coolant sump still pipe)
   expressions ((implies (and (sensitive-to litmus32 alcohol-vapor)
                              (inside coolant sump)

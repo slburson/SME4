@@ -20,8 +20,9 @@
 ;;; Unfortunately, that is a less useful thing to do when using ASDF, because the fasls are
 ;;; elsewhere, under ~/.cache/; not kept in the source directory.  For the moment, we force
 ;;; it to be set manually.
-(defvar *qrg-path* :unbound "Path stub to which all systems add their pathnames")
-(defvar *data-path* :unbound)
+(defvar *qrg-path* (namestring (asdf:system-source-directory :sme))
+  "Path stub to which all systems add their pathnames")
+(defvar *data-path* (namestring (asdf:system-source-directory :sme)))
 (defvar *path-sepchar* "/" "Path separation character (system-dependent)")
 
 (defun set-qrg-path (new-path)
