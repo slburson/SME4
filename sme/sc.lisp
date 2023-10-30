@@ -96,10 +96,10 @@
    (let ((new-leaves nil) (functor-mh nil))
       (dolist (mh (new-mhs sme))
          ; Set local descendants 
-         (setf (descendants mh) (set-add mh (descendants mh)))
+         (fset:adjoinf (descendants mh) mh)
          (setq functor-mh (functor-mh mh))
          (when functor-mh 
-            (setf (descendants mh) (set-add functor-mh (descendants mh))))
+            (fset:adjoinf (descendants mh) functor-mh))
          ; Set local nogoods
          (set-mh-local-nogoods mh)
          ; Find new leaves
@@ -122,11 +122,9 @@
   "Set the nogoods as the list of MHs that use the same 
    base or target as me, but are not me.  Returns BitSet."
   (with-slots (sme base-item target-item nogoods) mh
-    (setq nogoods
-          (set-union (mhs-involving-base base-item sme) 
-                      (mhs-involving-target target-item sme)))
-    (setq nogoods
-          (set-delete mh nogoods))))
+    (setq nogoods (fset:less (fset::union (mhs-involving-base base-item sme)
+					  (mhs-involving-target target-item sme))
+			     mh))))
 
 ;;;; Propagation of Structural Relations from Child to Parent
 
@@ -140,12 +138,9 @@
                       (cons (functor-mh mh) (arguments mh))
                     (arguments mh)))
     ;; Update parent's structural relations with args' structural relns
-     (setf (descendants mh)
-           (set-union! (descendants mh) (descendants arg-mh)))
-     (setf (nogoods mh)
-           (set-union! (nogoods mh) (nogoods arg-mh))))
-  (let ((inconsistent? (set-first-common-member
-                        (nogoods mh) (descendants mh))))
+    (fset:unionf (descendants mh) (descendants arg-mh))
+    (fset:unionf (nogoods mh) (nogoods arg-mh)))
+  (let ((inconsistent? (fset:least (fset:intersection (nogoods mh) (descendants mh)))))
     (when inconsistent?
       (mark-inconsistent mh inconsistent? ':inconsistent-via-arg)))
   (parents mh))
@@ -155,10 +150,8 @@
   ;; Handle functor first.
   (with-slots (functor-mh) cmh
     (when functor-mh
-       (setf (descendants cmh)
-             (set-union! (descendants cmh) (descendants functor-mh)))
-       (setf (nogoods cmh)
-             (set-union! (nogoods cmh) (nogoods functor-mh)))))
+       (fset:unionf (descendants cmh) (descendants functor-mh))
+       (fset:unionf (nogoods cmh) (nogoods functor-mh))))
   ;; Update parent's structural relations using nogoods and
   ;;  descendants implied by the choice sets for possible children
   (with-slots (descendants nogoods possible-children) cmh
@@ -167,17 +160,12 @@
                                      (arguments (base-item cmh))))
           (t-ctable (sort-mhs-by-arg #'target-item possible-children
                                      (arguments (target-item cmh)))))
-      (setf (descendants cmh)
-        (set-union! (descendants cmh)
-                    (common-cmh-choice-set-properties
-                     b-ctable t-ctable #'descendants)))
-      (setf (nogoods cmh)
-        (set-union! (nogoods cmh)
-                    (common-cmh-choice-set-properties 
-                     b-ctable t-ctable #'nogoods)))))
+      (fset:unionf (descendants cmh)
+		   (common-cmh-choice-set-properties b-ctable t-ctable #'descendants))
+      (fset:unionf (nogoods cmh)
+		   (common-cmh-choice-set-properties b-ctable t-ctable #'nogoods))))
   ;; Check for inconsistency, given child consistency.
-  (let ((inconsistent? (set-first-common-member
-                        (nogoods cmh) (descendants cmh))))
+  (let ((inconsistent? (fset:least (fset:intersection (nogoods cmh) (descendants cmh)))))
     (when inconsistent?
       (mark-inconsistent cmh inconsistent? ':inconsistent-via-child)))
   ;; Return parents to continue the propagation
@@ -192,22 +180,17 @@
   ;; of the commutative match hypothesis.  
   (flet ((find-common-mh-choice-set-property 
           (choices)
-          (cond ((null choices) (make-empty-set))
-                (t (let ((result (copy-set
-                                  (funcall property-fn (car choices)))))
+          (cond ((null choices) (fset:set))
+                (t (let ((result (funcall property-fn (car choices))))
                      (dolist (mh (cdr choices) result)
-                       (setq result
-                             (set-intersection! result
-                                                (funcall property-fn mh)))))))))
-    (let ((new-constraints (make-empty-set)))
+                       (fset:intersectf result (funcall property-fn mh))))))))
+    (let ((new-constraints (fset:set)))
       (dolist (b-choiceset b-ctable)
-        (let ((cset-constraints (find-common-mh-choice-set-property
-                                 (cdr b-choiceset))))
-          (setq new-constraints (set-union! new-constraints cset-constraints))))
+        (let ((cset-constraints (find-common-mh-choice-set-property (cdr b-choiceset))))
+          (fset:unionf new-constraints cset-constraints)))
       (dolist (t-choiceset t-ctable)
-        (let ((cset-constraints (find-common-mh-choice-set-property 
-                                 (cdr t-choiceset))))
-          (setq new-constraints (set-union! new-constraints cset-constraints))))
+        (let ((cset-constraints (find-common-mh-choice-set-property (cdr t-choiceset))))
+          (fset:unionf new-constraints cset-constraints)))
       new-constraints)))
         
 ;;;; Filtering Commutative Mh Children
@@ -254,11 +237,8 @@
                (setf (arguments mh) arg-mhs)
                ;; Update the descendants
                (dolist (arg-mh arg-mhs)
-                  (setf (descendants mh)
-                        (set-union! (descendants mh) (descendants arg-mh)))
-                  (setf (nogoods mh)
-                        (set-union! (nogoods mh) (nogoods arg-mh)))
-                  )
+                  (fset:unionf (descendants mh) (descendants arg-mh))
+                  (fset:unionf (nogoods mh) (nogoods arg-mh)))
                ;; Propagate structural relns to parents
                (propagate-structural-relations-upward mh))))))))
 
@@ -274,13 +254,11 @@
       ((null parents) nil)
     (setq new-parents (parents parent))
     ;; Propagate structural relations
-     (setf (descendants parent)
-           (set-union! (descendants parent) (descendants mh)))
-     (setf (nogoods parent)
-           (set-union! (nogoods parent) (nogoods mh)))
+     (fset:unionf (descendants parent) (descendants mh))
+     (fset:unionf (nogoods parent) (nogoods mh))
     ;; Check for inconsistency
     (setq inconsistent-mh
-      (set-first-common-member (descendants parent) (nogoods parent)))
+	  (fset:least (fset:intersection (descendants parent) (nogoods parent))))
     (when inconsistent-mh
        (mark-inconsistent parent inconsistent-mh ':inconsistent-comm-child))))
 

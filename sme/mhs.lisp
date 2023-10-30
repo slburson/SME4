@@ -61,14 +61,12 @@
     :accessor num-twins :initarg :num-twins :initform 0)
    (descendants 
     :documentation "Set of itself + MH's for its arguments, recursively." 
-    :accessor descendants  :type 
-    list
-     )
+    :accessor descendants  :type fset:set
+    :initform (fset:set))
    (nogoods 
     :documentation "All MHs inconsistent with this one" 
-    :accessor nogoods  :type 
-    list
-     ) 
+    :accessor nogoods  :type fset:set
+    :initform (fset:set))
    (arguments 
     :documentation "All MHs that are arguments to this one" 
     :accessor arguments  :initarg :arguments  :initform nil) 
@@ -114,6 +112,16 @@
     base or target item." 
   )) 
 
+(defmethod initialize-instance :after ((mh match-hypothesis) &rest initargs)
+  (declare (ignore initargs))
+  (assert (fset:set? (descendants mh)))
+  (assert (fset:set? (nogoods mh))))
+
+(defmethod (setf descendants) :before (new-val (mh match-hypothesis))
+  (assert (fset:set? new-val)))
+
+(defmethod (setf nogoods) :before (new-val (mh match-hypothesis))
+  (assert (fset:set? new-val)))
 
 (defmethod children ((mh match-hypothesis))
    (if (functor-mh mh) (cons (functor-mh mh) (arguments mh))
@@ -140,8 +148,6 @@ Assumes that the SME slot is always set by the constructor."
   (call-next-method)
   (when (sme instance) 
     (set-mh-id instance)
-    (setf (descendants instance) nil)
-    (setf (nogoods instance) nil)
     (setf (timestamp instance) (incf (timeclock (sme instance)))))
   instance)
 
@@ -152,6 +158,9 @@ Assumes that the SME slot is always set by the constructor."
  
 (defmethod print-object ((mh match-hypothesis) stream) 
   (format stream "<MH ~A ~A ~A>" (base-item mh) (target-item mh) (id mh)))
+
+(defmethod fset:compare ((mh1 match-hypothesis) (mh2 match-hypothesis))
+  (fset:compare-slots-no-unequal mh1 mh2 (:compare 'id #'<)))
 
 ;;; MATCH HYPOTHESIS SUBCLASSES 
 ;;;---------------------------------------------------------------------- 
@@ -179,7 +188,7 @@ Assumes that the SME slot is always set by the constructor."
 
 (defmethod possible-descendants ((cmh commutative-match-hypothesis))
   (when (possible-children cmh)
-    (reduce #'union (mapcar #'possible-descendants (possible-children cmh)))))
+    (fset:reduce #'fset:union (mapcar #'possible-descendants (possible-children cmh)))))
 
 (defmethod possible-descendants ((mh match-hypothesis))
   (descendants mh))
@@ -454,9 +463,9 @@ Assumes that the SME slot is always set by the constructor."
         (base-table (base-mh-table sme)) 
         (target-table (target-mh-table sme)))
     (setf (gethash base-item base-table)
-      (set-add mh (gethash base-item base-table)))
+	  (fset:with (or (gethash base-item base-table) (fset:set)) mh))
     (setf (gethash target-item target-table)
-      (set-add mh (gethash target-item target-table))))
+	  (fset:with (or (gethash target-item target-table) (fset:set)) mh)))
   (push mh (new-mhs sme)) 
   (push mh (mhs sme))) 
 
@@ -715,8 +724,9 @@ Assumes that the SME slot is always set by the constructor."
     no MH is found, returns NIL." 
    (let ((bcomps (mhs-involving-base base-item sme)) 
          (tcomps (mhs-involving-target target-item sme)))
-     (set-first-common-member bcomps tcomps)
-     ))
+     ;; The SME set package had an operation 'set-first-common-member' that would avoid
+     ;; computing the intersection; FSet has no equivalent (yet).
+     (fset:least (fset:intersection bcomps tcomps))))
 
 (defun find-indexed-mhs (base-item target-item sme &optional 
                                    (bcomps (mhs-involving-base base-item sme))
@@ -725,8 +735,7 @@ Assumes that the SME slot is always set by the constructor."
    "Returns a match hypothesis containing the given target 
     and base items from the set of MHs already formed.  If 
     no MH is found, returns NIL." 
-   (let ((mh))
-     (setf mh (set-first-common-member bcomps tcomps))
+   (let ((mh (fset:least (fset:intersection bcomps tcomps))))
      (when mh
        (if (< (1+ num-found) (num-twins mh))
          (cons mh 
@@ -736,12 +745,14 @@ Assumes that the SME slot is always set by the constructor."
          (list mh)))))
 
 (defun mhs-involving-base (base-item sme) 
-  "Return mhs that contain this base item." 
-   (gethash base-item (base-mh-table sme))) 
+  "Return mhs that contain this base item."
+  (or (gethash base-item (base-mh-table sme))
+      (fset:set)))
  
 (defun mhs-involving-target (target-item sme) 
   "Return mhs containing this target item." 
-   (gethash target-item (target-mh-table sme))) 
+  (or (gethash target-item (target-mh-table sme))
+      (fset:set)))
  
 
 ;;; Utility Functions 

@@ -48,7 +48,7 @@
    "A Description (also called a Dgroup) is a set of predicate
     calculus expressions which describe an object, situation, or
     domain.  New descriptions can be defined using the DefDescription
-    macro or the define-description function.")) 
+    macro or the define-description function."))
 
 (defun description? (possible-description)
    "Is the given object an SME description?"
@@ -60,6 +60,9 @@
 
 (defmethod print-object ((dgroup description) stream)
   (format stream "<Description ~A>" (name dgroup)))
+
+(defmethod fset:compare ((d1 description) (d2 description))
+  (fset:compare-slots-no-unequal d1 d2 (:compare 'id #'<)))
 
 (defun dgroup-from-file (file-name)
   (with-vocabulary *vocabulary*

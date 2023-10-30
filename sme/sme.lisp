@@ -133,6 +133,9 @@ kernel-mappings (preferred) or root-mappings."
 
 (defmethod vocabulary ((thing sme)) (vocabulary (base thing)))
 
+(defmethod fset:compare ((sme1 sme) (sme2 sme))
+  (fset:compare-slots-no-unequal sme1 sme2 (:compare 'id #'<)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Debugging support
 ;; 

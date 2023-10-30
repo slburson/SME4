@@ -77,20 +77,22 @@
 
 (defparameter *mapping-test-value-methods*
   (list
-    (cons :mh-count #'(lambda (mapping) (length (mhs mapping))))
+    (cons :mh-count #'(lambda (mapping) (fset:size (mhs mapping))))
     (cons :score 'score)
     (cons :root-score 'root-score)
     (cons :entity-mhs 
           #'(lambda (mapping)
-              (mapcar #'(lambda (mh) `(,(user-form (base-item mh))
-                                       ,(user-form (target-item mh))))
-                (entity-mhs mapping))))
+              (fset:convert 'list
+			    (fset:image #'(lambda (mh) `(,(user-form (base-item mh))
+							  ,(user-form (target-item mh))))
+					(entity-mhs mapping)))))
     (cons :root-mhs
           #'(lambda (mapping)
-              (mapcar #'(lambda (mh) `(,(user-form (base-item mh))
-                                       ,(user-form (target-item mh))))
-                (root-mhs mapping))))
-    (cons :root-mh-count #'(lambda (mapping) (length (root-mhs mapping))))
+              (fset:convert 'list
+			    (fset:image #'(lambda (mh) `(,(user-form (base-item mh))
+							  ,(user-form (target-item mh))))
+					(root-mhs mapping)))))
+    (cons :root-mh-count #'(lambda (mapping) (fset:size (root-mhs mapping))))
     (cons :cis #'(lambda (mapping) (lisp-form (inferences mapping))))
     ))
 

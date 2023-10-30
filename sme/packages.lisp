@@ -12,10 +12,13 @@
 	   #:*trap-errors* #:trap-error))
 
 (defpackage :sme
-  #+lucid          (:use :common-lisp :lucid-common-lisp :clos :qrg)
-  #+(or acl5 acl6) (:use :common-lisp :qrg)
-  #+acl3.0         (:use :common-lisp :common-graphics :qrg)
-  #-(or lucid acl5 acl6 acl3.0)  (:use :common-lisp :qrg)
+  ;; We use 'gmap' for unqualified access to 'gmap:gmap', because that's easily recognizable;
+  ;; but we don't use 'fset', so calls to FSet functions have to be qualified, and so are
+  ;; also easy to spot.
+  #+lucid          (:use :common-lisp :lucid-common-lisp :clos :qrg :gmap)
+  #+(or acl5 acl6) (:use :common-lisp :qrg :gmap)
+  #+acl3.0         (:use :common-lisp :common-graphics :qrg :gmap)
+  #-(or lucid acl5 acl6 acl3.0)  (:use :common-lisp :qrg :gmap)
 
   (:export
    ;; Loading, Running and Testing SME

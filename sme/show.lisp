@@ -66,8 +66,8 @@
      (order mh) (incomplete? mh) (inconsistent? mh) (score mh))
    ;; For debugging
   (format stream "~%  #nogoods: ~D; #descendants: ~D."
-    (if (listp (nogoods mh)) (length (nogoods mh)) (set-size (nogoods mh)))
-    (if (listp (descendants mh)) (length (descendants mh)) (set-size (descendants mh))))
+    (fset:size (nogoods mh))
+    (fset:size (descendants mh)))
   mh)
 
 (defmethod show ((m mapping) &optional (stream t))

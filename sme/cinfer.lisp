@@ -82,6 +82,9 @@
 
 (defmethod candidate-inference? ((ci candidate-inference)) t)
 
+(defmethod fset:compare ((ci1 candidate-inference) (ci2 candidate-inference))
+  (fset:compare-slots-no-unequal ci1 ci2 (:compare 'id #'<)))
+
 ;;;; Entry point for candidate inference generation
 
 (defmethod calculate-mapping-inferences ((map mapping) &aux infs reverse-infs)
@@ -138,20 +141,20 @@
 (defun source-root-included? (source-root mapping &optional (which 'base-item))
    "True if source root expression is mapped in given mapping."
    (declare (type expression source-root) (type mapping mapping))
-   (find source-root (mhs mapping) :key which))
+   (fset:find source-root (mhs mapping) :key which))
 
 (defun source-root-intersects? (source-root mapping sme &optional (which 'base-item))
   "True if source root expression contains subexpressions which
    are mapped in the given mapping."
   (declare (type expression source-root) (type mapping mapping) (type sme sme))
   (if (allow-entity-supported-inferences? (mapping-parameters sme))
-    (some #'(lambda (mh) 
-              (mh-intersects-expr-or-entity? mh source-root which))
-          (mhs mapping))
-    (some #'(lambda (mh) 
-              (mh-intersects-expr-only? mh source-root which))
-          (mhs mapping))))
-        
+      (gmap :or #'(lambda (mh)
+		    (mh-intersects-expr-or-entity? mh source-root which))
+	    (:set (mhs mapping)))
+    (gmap :or #'(lambda (mh)
+		  (mh-intersects-expr-only? mh source-root which))
+          (:set (mhs mapping)))))
+
 (defun mh-intersects-expr-or-entity? (mh source-root &optional (which 'base-item))
   (let ((source-item (funcall which mh)))
     (and (not (predicate? source-item))
@@ -172,7 +175,7 @@ the MHs involved(?).  Always succeeds."
   (declare (type mapping map))
   ;; Recurses down base-item, looking for grounding.  Keeps track of
   ;; what MH's are used in the candidate inference.
-  (let* ((mh (find source-item (mhs map) :key which))
+  (let* ((mh (fset:find source-item (mhs map) :key which))
          (corresponding-item (opposite-item-fn which))
          (corr-plus-mhs (when mh (list (funcall corresponding-item mh)
                                          (adjoin mh mhs)))))
@@ -202,8 +205,8 @@ the MHs involved(?).  Always succeeds."
 ;;; For more on metamapping, see Hinrichs, T. and Forbus, K. (2011).
 ;;; Transfer Learning Through Analogy in Games. AI Magazine, 32(1), 72-83.
 (defun find-non-identical-predicate (item map key-fn mhs)
-  (let ((mh (find (lisp-form item) (mhs map)
-                  :key #'(lambda (mh) (lisp-form (funcall key-fn mh))))))
+  (let ((mh (fset:find (lisp-form item) (mhs map)
+                       :key #'(lambda (mh) (lisp-form (funcall key-fn mh))))))
     (if mh
       (values (funcall (opposite-item-fn key-fn) mh) (adjoin mh mhs))
       (values item mhs))))

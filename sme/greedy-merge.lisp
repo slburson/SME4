@@ -220,7 +220,7 @@
         (entry nil))
       (dolist (kernel (consistent-kernel-mappings sme) table)
          (unless (funcall filter kernel)
-            (dolist (root-mh (root-mhs kernel))
+            (fset:do-set (root-mh (root-mhs kernel))
               (dolist (root-expr (roots (base-item root-mh)))
                 (cond ((and *fold-in-attributes*
                             (null sme::*minimal-ascend-attributes*)
@@ -285,7 +285,7 @@
 (defun merge-in-attributes (sme base-kernel attribute-partitions)
   (let ((new-kernel base-kernel)
         (entry nil))
-    (dolist (mh (mhs base-kernel) new-kernel)
+    (fset:do-set (mh (mhs base-kernel) new-kernel)
       (when (and (entity? mh)
                  (setq entry (assoc mh attribute-partitions :test #'eq)))
         (setq new-kernel (merge-mapping-pair sme new-kernel (second entry)))))))
@@ -425,8 +425,8 @@ order, for the next round of using it, if needed."))
                        (t (push candidate remaining1)))))))))
 
 (defun mhs-consistent? (mh1 mh2)
-   (and (not (intersection (descendants mh1) (nogoods mh2)))
-        (not (intersection (descendants mh2) (nogoods mh1)))))
+   (and (fset:disjoint? (descendants mh1) (nogoods mh2))
+        (fset:disjoint? (descendants mh2) (nogoods mh1))))
 
 (defun make-temp-mapping (mhs sme &aux new-mapping)
    "Makes a mapping that is used for temporary computations"

@@ -109,7 +109,7 @@
 ;;;;;;;;;;;;;;;;;;Helper Fns
 
 (defun num-nogoods (mapping)
-  (set-size (nogoods mapping)))
+  (fset:size (nogoods mapping)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;Stat functions

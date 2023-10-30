@@ -63,6 +63,9 @@
 (defmethod print-object ((entity entity) stream)
   (format stream "<Entity ~A>" (user-form entity)))
 
+(defmethod fset:compare ((e1 entity) (e2 entity))
+  (fset:compare-slots-no-unequal e1 e2 (:compare 'id #'<)))
+
 (defmethod arity ((entity entity)) 0)
 
 ;; To keep this compatible with the graphing routines,

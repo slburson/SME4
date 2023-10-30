@@ -85,6 +85,9 @@
                 (sme::probability expr))))
     (if prob (cons prob lisp-form) lisp-form)))
 
+(defmethod fset:compare ((e1 expression) (e2 expression))
+  (fset:compare-slots-no-unequal e1 e2 (:compare 'id #'<)))
+
 (defgeneric function? (object)
   (:documentation
    "True if this particular object either a function

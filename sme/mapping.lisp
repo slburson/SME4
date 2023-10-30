@@ -31,23 +31,19 @@
                :documentation "ID counter for candidate inferences")
    (mhs
     :documentation "The match hypotheses in mapping"
-    :type list  :initarg :mhs  :initform nil  :accessor mhs)
+    :type fset:set  :initarg :mhs  :initform (fset:set)  :accessor mhs)
    (root-mhs
     :documentation "The root match-hypotheses.  Subset of above."
-    :type list  :initarg :root-mhs  :initform nil  :accessor root-mhs)
+    :type fset:set  :initarg :root-mhs  :initform (fset:set)  :accessor root-mhs)
    (top-level-mhs
     :documentation "Match hypotheses that are top-level expressions."
-    :type list  :initarg :top-level-mhs  :initform nil  :accessor top-level-mhs)   
+    :type fset:set  :initarg :top-level-mhs  :initform (fset:set)  :accessor top-level-mhs)
    (descendants
     :documentation "Union of the descendants of its match hypotheses."
-    :type
-    bitset
-    :initarg :descendants  :accessor descendants)
+    :type fset:set :initarg :descendants :initform (fset:set) :accessor descendants)
    (nogoods
     :documentation "Union of the nogoods of its match hypotheses."
-    :accessor nogoods  :initarg :nogoods  :type 
-    bitset
-    )
+    :accessor nogoods  :initarg :nogoods  :type fset:set :initform (fset:set))
    (inferences
     :documentation "The base-to-target candidate inferences for this mapping."
     :initform nil  :initarg :inferences :accessor inferences)
@@ -79,18 +75,40 @@
 (defmethod make-mapping-instance ((mapping-type t) &rest initargs)
   (let* ((instance (apply 'make-instance (cons mapping-type initargs)))
          (sme (sme instance)))
-    (if (not (slot-boundp instance 'descendants))
-        (setf (descendants instance) nil))
-    (if (not (slot-boundp instance 'nogoods))
-        (setf (nogoods instance) nil))
-     (setf (id instance) (incf (mapping-counter sme)))
+    (setf (id instance) (incf (mapping-counter sme)))
     (setf (timestamp instance) (incf (timeclock sme)))
     instance))
+
+(defmethod initialize-instance :after ((m mapping) &rest initargs)
+  (declare (ignore initargs))
+  (assert (fset:set? (mhs m)))
+  (assert (fset:set? (root-mhs m)))
+  (assert (fset:set? (top-level-mhs m)))
+  (assert (fset:set? (descendants m)))
+  (assert (fset:set? (nogoods m))))
+
+(defmethod (setf mhs) :before (new-val (m mapping))
+  (assert (fset:set? new-val)))
+
+(defmethod (setf root-mhs) :before (new-val (m mapping))
+  (assert (fset:set? new-val)))
+
+(defmethod (setf top-level-mhs) :before (new-val (m mapping))
+  (assert (fset:set? new-val)))
+
+(defmethod (setf descendants) :before (new-val (m mapping))
+  (assert (fset:set? new-val)))
+
+(defmethod (setf nogoods) :before (new-val (m mapping))
+  (assert (fset:set? new-val)))
 
 (defmethod print-object ((mapping mapping) stream)
   (format stream "<Mapping ~A>" (id mapping)))
 
 (defmethod root-score ((mh mapping)) 0.0) 
+
+(defmethod fset:compare ((m1 mapping) (m2 mapping))
+  (fset:compare-slots-no-unequal m1 m2 (:compare 'id #'<)))
 
 ;;; Creating New Mappings
 
@@ -100,24 +118,22 @@
    mapping."
   (setq new-mapping
         (make-mapping-instance *default-mapping-type*
-         :root-mhs (list mh)
+         :root-mhs (fset:set mh)
          :mhs (descendants mh)
          :sme sme))
   (initialize-mapping-set-properties new-mapping mh)
   (setf (submappings new-mapping) (list new-mapping)) ;; starting point
-  (dolist (mh (mhs new-mapping))
+  (fset:do-set (mh (mhs new-mapping))
     (if (commutative-mh? mh)
         (push (make-ct-entry mh new-mapping) (commutatives new-mapping))))
   (check-commutative-mapping-constraints new-mapping)
   (push new-mapping (kernel-mappings sme)))
 
 (defmethod initialize-mapping-set-properties ((new-mapping mapping) mh)
-  (dolist (mh (nogoods mh))
-    (setf (nogoods new-mapping)
-      (set-add mh (nogoods new-mapping))))
-  (dolist (mh (mhs new-mapping))
-    (setf (descendants new-mapping)
-      (set-add mh (descendants new-mapping)))))
+  (fset:do-set (mh (nogoods mh))
+    (fset:adjoinf (nogoods new-mapping) mh))
+  (fset:do-set (mh (mhs new-mapping))
+    (fset:adjoinf (descendants new-mapping) mh)))
 
 (defun new-kernel-mappings (sme)
   "Return a list of all kernel mappings created since the last
@@ -132,24 +148,24 @@
 ;;; Consistency checking
 
 (defmethod mutually-consistent? ((m1 mapping) (m2 mapping))
-  (and (not (set-common-member? (descendants m1) (nogoods m2)))
-       (not (set-common-member? (descendants m2) (nogoods m1)))))
+  (and (fset:disjoint? (descendants m1) (nogoods m2))
+       (fset:disjoint? (descendants m2) (nogoods m1))))
 
 (defmethod mutually-consistent? ((m1 match-hypothesis) (m2 mapping))
-  (and (not (set-common-member? (descendants m1) (nogoods m2)))
-       (not (set-common-member? (nogoods m1) (descendants m2)))))
+  (and (fset:disjoint? (descendants m1) (nogoods m2))
+       (fset:disjoint? (nogoods m1) (descendants m2))))
 
 (defmethod mutually-consistent? ((m1 mapping) (m2 match-hypothesis))
-  (and (not (set-common-member? (descendants m2) (nogoods m1)))
-       (not (set-common-member? (nogoods m2) (descendants m1)))))
+  (and (fset:disjoint? (descendants m2) (nogoods m1))
+       (fset:disjoint? (nogoods m2) (descendants m1))))
 
 (defmethod mutually-consistent? ((m1 match-hypothesis) (m2 match-hypothesis))
-  (and (null (intersection (descendants m1) (nogoods m2)))
-       (null (intersection (descendants m2) (nogoods m1)))))
+  (and (fset:disjoint? (descendants m1) (nogoods m2))
+       (fset:disjoint? (descendants m2) (nogoods m1))))
 
 (defmethod mutually-consistent2? ((mh1 match-hypothesis) (m2 mapping))
-   (and (not (set-common-member? (descendants mh1) (nogoods m2)))
-        (not (set-common-member? (nogoods mh1) (descendants m2)))))
+   (and (fset:disjoint? (descendants mh1) (nogoods m2))
+        (fset:disjoint? (nogoods mh1) (descendants m2))))
 
 
 (defun mappings-mutually-consistent? (mapping1 mapping2)
@@ -199,7 +215,7 @@
    ;; Meaning that if any choice does not overlap the nogoods, it is 
    ;; consistent.
    (dolist (mh (ct-choice-set-mhs choice-set))
-      (when (not (set-member? mh (nogoods mapping)))
+      (when (not (fset:contains? (nogoods mapping) mh))
          (return-from choice-set-inconsistent? nil)))
    t)
 
@@ -287,9 +303,9 @@
                             :sme sme
                             :submappings key)))
     (setf (root-mhs new) ;; in case of previous merges 
-          (reduce #'union (mapcar #'root-mhs mappings-list)))
+          (fset:reduce #'fset:union (mapcar #'root-mhs mappings-list)))
     (setf (mhs new)
-      (reduce #'union (mapcar #'mhs mappings-list)))
+      (fset:reduce #'fset:union (mapcar #'mhs mappings-list)))
     (mapping-structural-evaluation new (mapping-parameters sme))
     (merge-consistency-check-fields new mappings-list)
     (push new (mappings-cache sme))
@@ -301,10 +317,8 @@
 (defmethod merge-consistency-check-fields ((new-mapping mapping) mappings-list)
   ;; merge the decendents and nogood lists
     (dolist (mapping mappings-list)
-      (setf (descendants new-mapping)
-        (set-union! (descendants new-mapping) (descendants mapping)))
-      (setf (nogoods new-mapping)
-        (set-union! (nogoods new-mapping) (nogoods mapping)))))
+      (fset:unionf (descendants new-mapping) (descendants mapping))
+      (fset:unionf (nogoods new-mapping) (nogoods mapping))))
 
 ;;; Merging commutative tables and table entries.
 
@@ -377,7 +391,7 @@
    (let ((nogoods (nogoods mapping)))
       (setf (ct-choice-set-mhs choice-set)
             (remove-if #'(lambda (mh)
-                           (set-member? mh nogoods))
+                           (fset::contains? nogoods mh))
               (ct-choice-set-mhs choice-set))))
    choice-set)
 
@@ -403,15 +417,12 @@
    (let* ((choice-sets (ct-entry-choice-sets entry))
           (subs (remove-duplicates (mapcar #'cadr choice-sets))))
       (dolist (sub subs)
-        (mapc #'(lambda(sub-mh) 
-                  (unless (member sub-mh (mhs mapping) :test #'eq)
-                    (push sub-mh (mhs mapping))
-                    (setf (descendants mapping)
-                      (set-union! (descendants mapping) (descendants sub-mh)))
-                    (setf (nogoods mapping)
-                      (set-union! (nogoods mapping) (nogoods sub-mh)))
-                      (incf (score mapping) (score sub-mh))))
-                   (descendants sub)))
+        (fset:do-set (sub-mh (descendants sub))
+	  (unless (fset:contains? (mhs mapping) sub-mh)
+	    (fset:adjoinf (mhs mapping) sub-mh)
+            (fset:unionf (descendants mapping) (descendants sub-mh))
+            (fset:unionf (nogoods mapping) (nogoods sub-mh))
+            (incf (score mapping) (score sub-mh)))))
       (setf (cdr entry) (cons :integrated subs)))
    entry)
 
@@ -436,33 +447,33 @@
 
 (defun aggregate-top-level-mhs (mapping)
   (setf (top-level-mhs mapping)
-    (remove-if-not #'(lambda (mh)
-                       (and (expression? (base-item mh))
-                            (or (top-level? (base-item mh))
-                                (top-level? (target-item mh)))))
-                   (mhs mapping))))
+	(fset:filter #'(lambda (mh)
+			 (and (expression? (base-item mh))
+			      (or (top-level? (base-item mh))
+				  (top-level? (target-item mh)))))
+		     (mhs mapping))))
 
 
 ;;; Utilities 
 
 (defmethod mh-containing-base-item ((item item)(mapping mapping))
-  (dolist (mh (mhs mapping))
+  (fset:do-set (mh (mhs mapping))
     (if (eq (base-item mh) item) (return-from mh-containing-base-item mh))))
 
 (defmethod mh-containing-target-item ((item item)(mapping mapping))
-  (dolist (mh (mhs mapping))
+  (fset:do-set (mh (mhs mapping))
     (if (eq (target-item mh) item)
         (return-from mh-containing-target-item mh))))
 
 (defmethod mh-containing-base-item ((p predicate)(mapping mapping))
-   (dolist (mh (mhs mapping))
-      (if (eq (base-item mh) p)
-         (return-from mh-containing-base-item mh))))
+  (fset:do-set (mh (mhs mapping))
+     (if (eq (base-item mh) p)
+	(return-from mh-containing-base-item mh))))
 
 (defmethod mh-containing-target-item ((p predicate)(mapping mapping))
-   (dolist (mh (mhs mapping))
-      (if (eq (target-item mh) p)
-         (return-from mh-containing-target-item mh))))
+  (fset:do-set (mh (mhs mapping))
+     (if (eq (target-item mh) p)
+	(return-from mh-containing-target-item mh))))
 
 ;;; Next two make the candidate inference calculation simpler
 (defmethod mh-containing-base-item ((arbitrary t)(mapping mapping))
@@ -486,7 +497,7 @@
   `(typep ,possible-mapping 'mapping))
 
 (defmethod entity-mhs ((mapping mapping))
-  (remove-if-not #'entity? (mhs mapping)))
+  (fset:filter #'entity? (mhs mapping)))
 
 (defun submap-of? (mapping1 mapping2)
   "True if mapping1 is a submapping of mapping2."

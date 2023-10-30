@@ -144,6 +144,9 @@
    "Print predicate as predicate type and the functor name."
    (format stream "<~A ~A>" (pred-type pred) (name pred)))
 
+(defmethod fset:compare ((p1 predicate) (p2 predicate))
+  (fset:compare-slots-no-unequal p1 p2 (:compare 'id #'<)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Defining new predicates
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
