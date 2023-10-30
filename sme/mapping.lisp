@@ -75,7 +75,7 @@
     expressions of two descriptions.  Individual alignments are 
     given as match hypotheses.  Mappings with a single pair of 
     aligned root expressions are called Kernel Mappings."))
-  
+
 (defmethod make-mapping-instance ((mapping-type t) &rest initargs)
   (let* ((instance (apply 'make-instance (cons mapping-type initargs)))
          (sme (sme instance)))

@@ -17,8 +17,8 @@
 ;; except that in v4, reverse candidate inferences can also be computed on demand,
 ;; to make finding differences simpler.
 ;;
-;; Candidate inferences are implemented as objects, containing support and 
-;; extrapolation scores (as defined in CogSci97 paper) as well as the form of 
+;; Candidate inferences are implemented as objects, containing support and
+;; extrapolation scores (as defined in CogSci97 paper) as well as the form of
 ;; the inference itself.  As per the theory, candidate inferences may or may not
 ;; be valid -- that sort of checking is the job of processes that are using SME
 ;; to perform comparisons.
@@ -48,8 +48,8 @@
          :documentation "Match hypotheses providing the structural support."
          :initarg :mhs
          :reader mhs)
-       ;; The MHs are stored with the inference because they can help determine 
-       ;; what mapping to switch to if the current mapping doesn't look 
+       ;; The MHs are stored with the inference because they can help determine
+       ;; what mapping to switch to if the current mapping doesn't look
        ;; appropriate.  Also used in the evaluation computations.
        (support-score :type float
          :documentation "Support evaluation of candidate inference"
@@ -61,10 +61,10 @@
          :documentation "Shadow structure cache for evaluation"
          :initform nil :accessor ci-shadow-cache)
        (base-item
-        :documentation "Source item CI originates from.  
+        :documentation "Source item CI originates from.
                         This is the base for forward CIs, the target for reverse CIs."
          :type t :initarg :base-item :reader base-item)
-       ;; The "base-item" name remains for backward compatibility. 
+       ;; The "base-item" name remains for backward compatibility.
        ))
 
 (defmethod print-object ((ci candidate-inference) (stream t))
@@ -91,7 +91,7 @@
   (setf (inferences map) infs)
   (when (compute-reverse-inferences?
          (mapping-parameters (sme map)))
-    (setq reverse-infs 
+    (setq reverse-infs
           (find-mapping-inferences (sme map) map :reverse? t))
     (setf (reverse-inferences map) reverse-infs))
   (append infs reverse-infs))
@@ -108,7 +108,7 @@
 
 (defmethod find-mapping-inferences ((sme sme) (map mapping) &key (reverse? nil))
    "Finds the candidate inferences for a mapping"
-   ;; This version creates structures for CI's, and stores with them 
+   ;; This version creates structures for CI's, and stores with them
    ;; information about what MH's each inference depends upon.  This information
    ;; should be useful in, for instance, decisions about what matches might be
    ;; reasonable next candidates if contemplating a switch.
@@ -121,7 +121,7 @@
           ;; Don't infer top-level ubiquitous predicates
           (when (and (not (source-root-included? source-root map which))
                      (source-root-intersects? source-root map sme which))
-             (multiple-value-bind (form mhs)  
+             (multiple-value-bind (form mhs)
                  (try-for-ci source-root map nil which)
                 (when form
                    (push (make-instance 'candidate-inference
@@ -141,7 +141,7 @@
    (find source-root (mhs mapping) :key which))
 
 (defun source-root-intersects? (source-root mapping sme &optional (which 'base-item))
-  "True if source root expression contains subexpressions which 
+  "True if source root expression contains subexpressions which
    are mapped in the given mapping."
   (declare (type expression source-root) (type mapping mapping) (type sme sme))
   (if (allow-entity-supported-inferences? (mapping-parameters sme))
@@ -179,7 +179,7 @@ the MHs involved(?).  Always succeeds."
     (cond ((entity? source-item)
            (if mh (values-list corr-plus-mhs)
              (values (list ':skolem source-item) mhs)))
-          ((predicate? source-item) 
+          ((predicate? source-item)
            (if mh (values-list corr-plus-mhs) ;; non-identical?
              (find-non-identical-predicate source-item map which mhs)))
           (mh (values-list corr-plus-mhs))
@@ -199,12 +199,12 @@ the MHs involved(?).  Always succeeds."
   (if (eq item-fn 'base-item) 'target-item 'base-item))
 
 ;;; Support metamappings by looking for correspondences that treat predicates as entities.
-;;; For more on metamapping, see Hinrichs, T. and Forbus, K. (2011). 
-;;; Transfer Learning Through Analogy in Games. AI Magazine, 32(1), 72-83. 
+;;; For more on metamapping, see Hinrichs, T. and Forbus, K. (2011).
+;;; Transfer Learning Through Analogy in Games. AI Magazine, 32(1), 72-83.
 (defun find-non-identical-predicate (item map key-fn mhs)
   (let ((mh (find (lisp-form item) (mhs map)
                   :key #'(lambda (mh) (lisp-form (funcall key-fn mh))))))
     (if mh
       (values (funcall (opposite-item-fn key-fn) mh) (adjoin mh mhs))
       (values item mhs))))
-           
+

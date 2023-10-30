@@ -239,14 +239,15 @@
    "Run a single SME mapping test."
    (declare (type sme-test sme-test))
    (format t "~%   Running test ~A..." sme-test)
+   (setf (results sme-test) nil)
    (with-slots (vocabulary-filename base-filename target-filename) sme-test
      (in-vocabulary (vocabulary-from-file vocabulary-filename))
      (with-test-parameters sme-test
       (let* ((sme (define-sme (dgroup-from-file base-filename)
                     (dgroup-from-file target-filename) :sme-type sme-type)))
-         (sme-user::gc)
-         (setf (execution-time sme-test)
-               (return-time (match sme)))
+        (sme-user::gc)
+        (setf (execution-time sme-test)
+              (return-time (match sme)))
         (format t " (~A s)" (execution-time sme-test))
         (if *cache-detailed-sme-test-results?*
           (push (cons sme-test sme) *detailed-sme-test-results*))
@@ -367,6 +368,12 @@
            (eq :reversible (car value2))) ;; kludge for magi tests.
       (equal-reversible-sets (cdr value1) (cdr value2))
       (equal-sets value1 value2)))
+
+(defmethod equal-test-values ((value1 single-float) (value2 single-float))
+  (or (= value1 value2)
+      (and (/= value1 0.0)
+	   (< (/ (abs (- value1 value2)) value1)
+	      .0001))))
 
 (defun equal-sets (value1 value2)
    "True if items are the same set."

@@ -1,4 +1,4 @@
-;;;; -*- Mode: LISP; Syntax: Common-Lisp; Base: 10;                         -*-
+;;;; -*- Mode: LISP; Package: SME -*-
 ;;;; --------------------------------------------------------------------------
 ;;;; File name: entity.lsp
 ;;;;    System: SME
@@ -164,7 +164,7 @@
 (defmethod get-entity-attributes ((entity entity))
   (let ((result nil))
     (dolist (exp (parents entity) result)
-      (if (attribute? exp)
+      (when (attribute? exp)
         ;; N.B. Don't need a pushnew because SME uniquifies expressions
         (push (predicate exp) result)))))
 

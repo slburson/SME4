@@ -96,7 +96,7 @@
                     characteristic of the slot isn't used directly by 
                     the program, and is chiefly for diagnostics." 
     :type list 
-    :accessor incomplete?  :initarg :incomplete?  :initform nil) 
+    :accessor incomplete?  :initarg :incomplete?  :initform nil)
    (inconsistent? 
     :documentation "If non-nil, the MH is structurally inconsistent. 
                     Initially NIL." 
@@ -151,8 +151,8 @@ Assumes that the SME slot is always set by the constructor."
     mh))
  
 (defmethod print-object ((mh match-hypothesis) stream) 
-  (format stream "<MH ~A ~A ~A>" (base-item mh) (target-item mh) (id mh))) 
- 
+  (format stream "<MH ~A ~A ~A>" (base-item mh) (target-item mh) (id mh)))
+
 ;;; MATCH HYPOTHESIS SUBCLASSES 
 ;;;---------------------------------------------------------------------- 
  
@@ -358,8 +358,7 @@ Assumes that the SME slot is always set by the constructor."
                              (role-relation-pos (predicate bth))))
      (t                              ;; regular expression 
       (let ((mhs (make-expression-mh bth tth rationale sme)))
-        (values (car mhs) mhs)))
-      )))
+        (values (car mhs) mhs))))))
  
 (defun make-entity-mh (base-entity target-entity rationale sme) 
   "Construct a match hypothesis between two entities, using the  
@@ -496,7 +495,7 @@ Assumes that the SME slot is always set by the constructor."
                                  &optional (mh-type 'simple-match-hypothesis))
   (let ((mh (make-instance mh-type 
 			   :base-item bfunctor :target-item tfunctor 
-			   :order 0 :sme sme  
+			   :order 0 :sme sme
 			   :rationale rationale)))
     (index-mh-structure mh sme)
     mh))
@@ -632,7 +631,7 @@ Assumes that the SME slot is always set by the constructor."
   (when mhs
     (let ((new-mhs)
           (init-mhs (if (listp (first mhs))
-                     (first mhs)
+			(first mhs)
                      (list (first mhs))))
           (rem-mhs (make-arg-mh-lists (cdr mhs))))
       (dolist (mh init-mhs (reverse new-mhs))
@@ -722,18 +721,18 @@ Assumes that the SME slot is always set by the constructor."
 (defun find-indexed-mhs (base-item target-item sme &optional 
                                    (bcomps (mhs-involving-base base-item sme))
                                    (tcomps (mhs-involving-target target-item sme))
-                                   (num_found 0))
+                                   (num-found 0))
    "Returns a match hypothesis containing the given target 
     and base items from the set of MHs already formed.  If 
     no MH is found, returns NIL." 
    (let ((mh))
      (setf mh (set-first-common-member bcomps tcomps))
      (when mh
-       (if (< (1+ num_found) (num-twins mh))
+       (if (< (1+ num-found) (num-twins mh))
          (cons mh 
                (find-indexed-mhs base-item target-item sme
                                  (remove mh bcomps) (remove mh tcomps)
-                                 (1+ num_found)))
+                                 (1+ num-found)))
          (list mh)))))
 
 (defun mhs-involving-base (base-item sme) 

@@ -1,4 +1,4 @@
-;;;; -*- Mode: Lisp; Mode: Outline; -*-
+;;;; -*- Mode: Lisp; Package: SME -*-
 ;;;; ------------------------------------------------------------
 ;;;; File name: match.lsp
 ;;;;    System: SME
